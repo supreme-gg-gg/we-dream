@@ -14,7 +14,7 @@ struct HomeView: View {
             
             Text("let EuclidChampion2024 = 'Frank Zhang'")
                 .tabItem {
-                    Image(systemName: "list.number")
+                    Image(systemName: "trophy.fill")
                     Text("Honour Roll")
                 }
             
@@ -72,9 +72,9 @@ struct HomeView: View {
                         
                         ScrollView(.horizontal) {
                             HStack {
-                                LargeButton(title: "Challenges", imageName: "trophy.fill")
-                                LargeButton(title: "Leaderboard", imageName: "list.number")
-                                LargeButton(title: "Clan Battle", imageName: "shield.lefthalf.filled")
+                                LargeButton(title: "Challenges", imageName: "flag.filled.and.flag.crossed")
+                                LargeButton(title: "Meditation", imageName: "figure.mind.and.body")
+                                LargeButton(title: "Wind down music", imageName: "music.note")
                             }
                         }
                         
@@ -99,7 +99,7 @@ struct HomeView: View {
             
             Text("Social page")
                 .tabItem {
-                    Image(systemName: "person.3.sequence.fill")
+                    Image(systemName: "person.2.fill")
                     Text("Social")
                 }
             
