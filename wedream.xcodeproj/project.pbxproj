@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		4B7837EA2BE9382A0010B8D2 /* wedreamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7837E92BE9382A0010B8D2 /* wedreamApp.swift */; };
-		4B7837EC2BE9382A0010B8D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7837EB2BE9382A0010B8D2 /* ContentView.swift */; };
 		4B7837EE2BE9382C0010B8D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B7837ED2BE9382C0010B8D2 /* Assets.xcassets */; };
 		4B7837F12BE9382C0010B8D2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B7837F02BE9382C0010B8D2 /* Preview Assets.xcassets */; };
 		4B7837FB2BE9382C0010B8D2 /* wedreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7837FA2BE9382C0010B8D2 /* wedreamTests.swift */; };
 		4B7838052BE9382C0010B8D2 /* wedreamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7838042BE9382C0010B8D2 /* wedreamUITests.swift */; };
 		4B7838072BE9382C0010B8D2 /* wedreamUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7838062BE9382C0010B8D2 /* wedreamUITestsLaunchTests.swift */; };
+		4BA114942BED9E5500663C7F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA114932BED9E5500663C7F /* HomeView.swift */; };
+		4BA114962BED9E9900663C7F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA114952BED9E9900663C7F /* User.swift */; };
+		4BA1149B2BEDA14F00663C7F /* StreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA1149A2BEDA14F00663C7F /* StreakView.swift */; };
+		4BA1149D2BEDA16200663C7F /* XPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA1149C2BEDA16200663C7F /* XPView.swift */; };
+		4BA1149F2BEDA56A00663C7F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA1149E2BEDA56A00663C7F /* ProfileView.swift */; };
+		4BA114A32BEDACA000663C7F /* LargeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA114A22BEDACA000663C7F /* LargeButton.swift */; };
+		4BA114A52BEDB26400663C7F /* ChallengesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA114A42BEDB26400663C7F /* ChallengesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +42,6 @@
 /* Begin PBXFileReference section */
 		4B7837E62BE9382A0010B8D2 /* wedream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wedream.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B7837E92BE9382A0010B8D2 /* wedreamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wedreamApp.swift; sourceTree = "<group>"; };
-		4B7837EB2BE9382A0010B8D2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4B7837ED2BE9382C0010B8D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4B7837F02BE9382C0010B8D2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4B7837F62BE9382C0010B8D2 /* wedreamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = wedreamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +49,13 @@
 		4B7838002BE9382C0010B8D2 /* wedreamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = wedreamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B7838042BE9382C0010B8D2 /* wedreamUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wedreamUITests.swift; sourceTree = "<group>"; };
 		4B7838062BE9382C0010B8D2 /* wedreamUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wedreamUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4BA114932BED9E5500663C7F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		4BA114952BED9E9900663C7F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		4BA1149A2BEDA14F00663C7F /* StreakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakView.swift; sourceTree = "<group>"; };
+		4BA1149C2BEDA16200663C7F /* XPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPView.swift; sourceTree = "<group>"; };
+		4BA1149E2BEDA56A00663C7F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		4BA114A22BEDACA000663C7F /* LargeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeButton.swift; sourceTree = "<group>"; };
+		4BA114A42BEDB26400663C7F /* ChallengesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +107,9 @@
 			isa = PBXGroup;
 			children = (
 				4B7837E92BE9382A0010B8D2 /* wedreamApp.swift */,
-				4B7837EB2BE9382A0010B8D2 /* ContentView.swift */,
+				4BA114992BEDA13A00663C7F /* Views */,
+				4BA114982BEDA11600663C7F /* Model */,
+				4BA114972BEDA10A00663C7F /* Screens */,
 				4B7837ED2BE9382C0010B8D2 /* Assets.xcassets */,
 				4B7837EF2BE9382C0010B8D2 /* Preview Content */,
 			);
@@ -125,6 +139,50 @@
 				4B7838062BE9382C0010B8D2 /* wedreamUITestsLaunchTests.swift */,
 			);
 			path = wedreamUITests;
+			sourceTree = "<group>";
+		};
+		4BA114972BEDA10A00663C7F /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				4BA114932BED9E5500663C7F /* HomeView.swift */,
+				4BA1149E2BEDA56A00663C7F /* ProfileView.swift */,
+				4BA114A42BEDB26400663C7F /* ChallengesView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		4BA114982BEDA11600663C7F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4BA114952BED9E9900663C7F /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4BA114992BEDA13A00663C7F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4BA114A12BEDAC8800663C7F /* Buttons */,
+				4BA114A02BEDAC7F00663C7F /* Views */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4BA114A02BEDAC7F00663C7F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4BA1149A2BEDA14F00663C7F /* StreakView.swift */,
+				4BA1149C2BEDA16200663C7F /* XPView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4BA114A12BEDAC8800663C7F /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				4BA114A22BEDACA000663C7F /* LargeButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,8 +315,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B7837EC2BE9382A0010B8D2 /* ContentView.swift in Sources */,
+				4BA114A52BEDB26400663C7F /* ChallengesView.swift in Sources */,
+				4BA1149D2BEDA16200663C7F /* XPView.swift in Sources */,
+				4BA1149B2BEDA14F00663C7F /* StreakView.swift in Sources */,
+				4BA114942BED9E5500663C7F /* HomeView.swift in Sources */,
 				4B7837EA2BE9382A0010B8D2 /* wedreamApp.swift in Sources */,
+				4BA114A32BEDACA000663C7F /* LargeButton.swift in Sources */,
+				4BA1149F2BEDA56A00663C7F /* ProfileView.swift in Sources */,
+				4BA114962BED9E9900663C7F /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +494,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -459,6 +524,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
