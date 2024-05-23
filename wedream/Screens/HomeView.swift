@@ -18,7 +18,7 @@ struct HomeView: View {
                     Text("Honour Roll")
                 }
             
-            ProfileView()
+            ProfileView(showSignInView: .constant(false))
                 .tabItem {
                     Image(systemName: "person.fill")
                     Text("Profile")
@@ -41,7 +41,7 @@ struct HomeView: View {
                     }.padding()
                         
                     Spacer()
-                    NavigationLink(destination: ProfileView()) {
+                    NavigationLink(destination: ProfileView(showSignInView: .constant(false))) {
                         Image(systemName: "person.crop.circle.fill")
                     }.padding()
                         
