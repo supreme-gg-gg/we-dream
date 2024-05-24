@@ -17,7 +17,7 @@ struct DBUser: Codable {
     let photoUrl: String?
     let dateCreated: Date?
     var isPremium: Bool?
-    let weeklyXP: Int?
+    var weeklyXP: Int?
     
     // simplifying: creating a convenience initialiser inside here
     init(auth: AuthDataResultModel) {
@@ -59,6 +59,18 @@ struct DBUser: Codable {
         let currentValue = isPremium ?? false
         isPremium = !currentValue
     }
+    
+    /// ignore this for now, I used another method below in UserManager for instant update
+    /// I might return to this later in case we figured out a way to store data locally efficiently :)
+    mutating func updateXP(by: Int, clear: Bool?) {
+        if (clear ?? false) {
+            weeklyXP = 0
+            return
+        }
+        var currentXP = weeklyXP ?? 0
+        currentXP += by
+        weeklyXP = currentXP
+    }
 }
 
 final class UserManager {
@@ -96,7 +108,8 @@ final class UserManager {
         // change the data into the required format (dictionary)
         var userData: [String: Any] = [
             "user_id" : auth.uid,
-            "date_created" : Timestamp()
+            "date_created" : Timestamp(),
+            "weeklyXP": 0
         ]
         
         // take care about optionals
@@ -148,6 +161,22 @@ final class UserManager {
         ]
         
         try await userDocument(userId: userId).updateData(data)
+    }
+    
+    func updateWeeklyXP(userId: String, weeklyXP: Int) async throws {
+        
+        let data: [String: Any] = [
+            "weekly_xp" : weeklyXP
+        ]
+        
+        try await userDocument(userId: userId).updateData(data)
+        
+    } // the next problem -- where to call this function and WHEN??
+    
+    func updateProfile(userId: String, newProfile: [String: Any]) async throws {
+        
+        try await userDocument(userId: userId).updateData(newProfile)
+        
     }
     
 }
