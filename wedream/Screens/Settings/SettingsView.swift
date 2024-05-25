@@ -9,9 +9,9 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    @EnvironmentObject var userVM: UserViewModel
     @StateObject private var viewModel = SettingsViewModel()
     @Binding var showSignInView: Bool
-    
     
     var body: some View {
         List {
@@ -29,17 +29,24 @@ struct SettingsView: View {
             if viewModel.authProviders.contains(.email) {
                 emailSection
             }
+            
+            Section(header: Text("Profile")) {
+                ProfileForm(userVM: userVM)
+            }
+            
         }
+        .listStyle(GroupedListStyle())
         .onAppear {
             viewModel.loadAuthProviders()
         }
         .navigationTitle("Settings")
-    }
+     }
 }
 
 #Preview {
     NavigationStack {
         SettingsView(showSignInView: .constant(false))
+            .environmentObject(UserViewModel())
     }
 }
 

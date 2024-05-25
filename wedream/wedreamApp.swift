@@ -30,6 +30,11 @@ struct YourApp: App {
     WindowGroup {
       RootView()
             .environmentObject(userVM)
+            .onAppear {
+                Task {
+                    try await userVM.loadCurrentUser()
+                }
+            }
     }
   }
 }

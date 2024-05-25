@@ -38,12 +38,11 @@ struct AuthView: View {
                     }
                 }
             }
-            
-            Spacer()
-            
         }
         .padding()
         .navigationTitle("Sign In")
+        
+        Spacer()
     }
 }
 

@@ -9,77 +9,67 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @StateObject private var viewModel = UserViewModel()
+    @EnvironmentObject var userVM: UserViewModel
+    
     @Binding var showSignInView: Bool
     
+    @State private var isProfileView = false
+    
     var body: some View {
-        VStack {
+        NavigationStack {
             List {
-                if let user = viewModel.user {
-                    Text("UserId: \(user.userId)")
-                    
+                if let user = userVM.user {
+                    HStack {
+                        Text("UserId: \(user.userId)")
+                    }
+                    HStack {
+                        Text("Your XP: \(user.weeklyXP ?? 0)")
+                    }
+                } else {
+                    Text("No user data available")
+                }
+                
+                if let profile = userVM.profileInfo {
+                    HStack {
+                        Text("Name: \(profile["name"] ?? "")")
+                    }
+                } else {
+                    Text("No profile info available")
+                }
+                
+                if let user = userVM.user {
                     Button {
-                        viewModel.togglePremiumStatus()
+                        userVM.togglePremiumStatus()
                     } label: {
                         Text("User is premium: \((user.isPremium ?? false).description.capitalized)")
                     }
                 }
-            }.task {
-                try? await viewModel.loadCurrentUser()
             }
-            
-            Form {
-                Section(header: Text("User Settings")) {
-                    TextField("Name", text: Binding<String>(
-                        get: { self.viewModel.profileInfo?["name"] as! String },
-                        set: { self.viewModel.profileInfo?["name"] = $0 }
-                    ))
-                    .padding()
-                    Picker(selection: Binding<String>(
-                        get: { self.viewModel.profileInfo?["gender"] as! String },
-                        set: { self.viewModel.profileInfo?["gender"] = $0 }
-                    ), label: Text("Gender")) {
-                        Text("Male").tag("Male")
-                        Text("Female").tag("Female")
-                        Text("Other").tag("Other")
+            .navigationTitle("Profile")
+            .toolbar {
+                if isProfileView {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink {
+                            SettingsView(showSignInView: $showSignInView)
+                        } label: {
+                            Image(systemName: "gear")
+                                .font(.headline)
+                        }
                     }
-                    .pickerStyle(SegmentedPickerStyle())
-                    .padding()
                 }
-                
-                Section(header: Text("Health Information")) {
-                    Stepper(value: Binding<Int>(
-                        get: { self.viewModel.profileInfo?["sleepGoal"] as! Int },
-                        set: { self.viewModel.profileInfo?["sleepGoal"] = $0 }
-                    ), in: 0...24) {
-                        Text("Sleep Goal: \(viewModel.profileInfo?["sleepGoal"] as! Int)")
-                    }
-                    .padding()
-                }
-                
-                Button {
-                    viewModel.updateUserProfile()
-                } label: {
-                    Text("Save Preferences")
-                }
+            }
+            .onAppear {
+                isProfileView = true
+            }
+            .onDisappear {
+                isProfileView = false
             }
         }
-        .navigationTitle("Profile")
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink {
-                    SettingsView(showSignInView: $showSignInView)
-                } label: {
-                    Image(systemName: "gear")
-                        .font(.headline)
-                }
-            }
-        }
+        
     }
 }
 
 #Preview {
-    NavigationStack {
-        ProfileView(showSignInView: .constant(false))
-    }
+    ProfileView(showSignInView: .constant(false))
+        .environmentObject(UserViewModel())
 }

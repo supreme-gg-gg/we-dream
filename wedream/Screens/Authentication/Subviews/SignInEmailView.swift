@@ -12,6 +12,7 @@ final class SignInEmailViewModel: ObservableObject {
     
     @Published var email = ""
     @Published var password = ""
+    @Published var showOverlay = false
     
     func signUp() async throws {
         guard !email.isEmpty, !password.isEmpty else {
@@ -20,6 +21,10 @@ final class SignInEmailViewModel: ObservableObject {
         }
         
         let authDataResult = try await AuthManager.shared.createUser(email: email, password: password)
+        
+        if let newUser = authDataResult.isNewUser {
+            showOverlay = newUser
+        }
         
         let user = DBUser(auth: authDataResult)
         try await UserManager.shared.createNewUser(user: user)
@@ -60,7 +65,7 @@ struct SignInEmailView: View {
             Button {
                 Task {
                     do {
-                        try await viewModel.signUp()
+                        try await viewModel.signIn()
                         showSignInView = false // dismiss signin view if it is successful
                         return // if can signin return out directly
                     } catch {
@@ -70,7 +75,7 @@ struct SignInEmailView: View {
                     // it will only get here if signin failed
                     
                     do {
-                        try await viewModel.signIn()
+                        try await viewModel.signUp()
                         showSignInView = false
                         return
                     } catch {
@@ -89,6 +94,12 @@ struct SignInEmailView: View {
             }
         }.navigationTitle("Enter your email")
             .padding()
+            /* sheet(isPresented: $viewModel.showOverlay, content: {
+                NavigationStack {
+                    ProfileForm(userVM: UserViewModel())
+                        .navigationTitle("Create your profile")
+                }
+            }) */
     }
 }
 
