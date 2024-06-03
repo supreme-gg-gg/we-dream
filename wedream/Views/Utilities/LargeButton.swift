@@ -11,20 +11,23 @@ struct LargeButton: View {
     
     var title: String
     var imageName: String
+    var destination: AnyView?
     
     var body: some View {
-        Button {
-            print("pressed")
-        } label: {
-            Label(title, systemImage: imageName)
+        NavigationLink (destination: destination ?? AnyView(HomeView())){
+            Button {
+                print("pressed")
+            } label: {
+                Label(title, systemImage: imageName)
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.extraLarge)
+            .foregroundColor(Color("blue_dark"))
+            .tint(Color(.white))
         }
-        .buttonStyle(.bordered)
-        .controlSize(.extraLarge)
-        .foregroundColor(Color("blue_light"))
-        .tint(Color("blue_dark"))
     }
 }
 
 #Preview {
-    LargeButton(title: "Test title", imageName: "book.fill")
+    LargeButton(title: "Test title", imageName: "book.fill", destination: AnyView(HomeView()))
 }

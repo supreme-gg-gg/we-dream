@@ -14,6 +14,9 @@ struct SettingsView: View {
     @Binding var showSignInView: Bool
     
     var body: some View {
+        VStack {
+            
+        }
         List {
             Button("Log out") {
                 Task {
@@ -31,7 +34,9 @@ struct SettingsView: View {
             }
             
             Section(header: Text("Profile")) {
-                ProfileForm(userVM: userVM)
+                VStack {
+                    ProfileForm(userVM: userVM)
+                }
             }
             
         }

@@ -26,6 +26,8 @@
 		4B7FF7ED2BFBA9D300F8166C /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 4B7FF7EC2BFBA9D300F8166C /* GoogleSignIn */; };
 		4B7FF7EF2BFBA9D300F8166C /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4B7FF7EE2BFBA9D300F8166C /* GoogleSignInSwift */; };
 		4B7FF7F22BFBAA6800F8166C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B7FF7F12BFBAA6800F8166C /* GoogleService-Info.plist */; };
+		4B9264B62C0A7E2A00577DAB /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9264B52C0A7E2A00577DAB /* SignUpView.swift */; };
+		4B9264B82C0A8B7000577DAB /* ChallengesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9264B72C0A8B7000577DAB /* ChallengesManager.swift */; };
 		4BA114942BED9E5500663C7F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA114932BED9E5500663C7F /* HomeView.swift */; };
 		4BA1149B2BEDA14F00663C7F /* StreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA1149A2BEDA14F00663C7F /* StreakView.swift */; };
 		4BA1149D2BEDA16200663C7F /* XPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA1149C2BEDA16200663C7F /* XPView.swift */; };
@@ -37,6 +39,8 @@
 		4BC330DE2C010E10005FC26C /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC330DD2C010E10005FC26C /* UserViewModel.swift */; };
 		4BCF6D622C0141B80064D187 /* HRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BCF6D612C0141B80064D187 /* HRView.swift */; };
 		4BCF6D642C014EB60064D187 /* ProfileForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BCF6D632C014EB60064D187 /* ProfileForm.swift */; };
+		4BF2935A2C0A959F00836F97 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF293592C0A959F00836F97 /* Functions.swift */; };
+		4BF2935C2C0D7CD700836F97 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF2935B2C0D7CD700836F97 /* Content.swift */; };
 		4BFDC8162BFBEBB8001E6DED /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFDC8152BFBEBB8001E6DED /* SettingsViewModel.swift */; };
 		4BFDC81A2BFBEBFE001E6DED /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFDC8192BFBEBFE001E6DED /* AuthViewModel.swift */; };
 		4BFDC81D2BFBEC31001E6DED /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFDC81C2BFBEC31001E6DED /* ProfileView.swift */; };
@@ -77,6 +81,8 @@
 		4B7838062BE9382C0010B8D2 /* wedreamUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wedreamUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4B7FF7F02BFBAA1A00F8166C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4B7FF7F12BFBAA6800F8166C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Services/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4B9264B52C0A7E2A00577DAB /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		4B9264B72C0A8B7000577DAB /* ChallengesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengesManager.swift; sourceTree = "<group>"; };
 		4BA114932BED9E5500663C7F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		4BA1149A2BEDA14F00663C7F /* StreakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakView.swift; sourceTree = "<group>"; };
 		4BA1149C2BEDA16200663C7F /* XPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPView.swift; sourceTree = "<group>"; };
@@ -86,6 +92,8 @@
 		4BC330DD2C010E10005FC26C /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		4BCF6D612C0141B80064D187 /* HRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HRView.swift; sourceTree = "<group>"; };
 		4BCF6D632C014EB60064D187 /* ProfileForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileForm.swift; sourceTree = "<group>"; };
+		4BF293592C0A959F00836F97 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		4BF2935B2C0D7CD700836F97 /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
 		4BFDC8152BFBEBB8001E6DED /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		4BFDC8192BFBEBFE001E6DED /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		4BFDC81C2BFBEC31001E6DED /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -153,6 +161,7 @@
 				4B7FF7F02BFBAA1A00F8166C /* Info.plist */,
 				4B7FF7F12BFBAA6800F8166C /* GoogleService-Info.plist */,
 				4B7837E92BE9382A0010B8D2 /* wedreamApp.swift */,
+				4BF2935B2C0D7CD700836F97 /* Content.swift */,
 				4BA114992BEDA13A00663C7F /* Views */,
 				4BA114972BEDA10A00663C7F /* Screens */,
 				4B7837ED2BE9382C0010B8D2 /* Assets.xcassets */,
@@ -197,6 +206,7 @@
 				4BCF6D612C0141B80064D187 /* HRView.swift */,
 				4BA114932BED9E5500663C7F /* HomeView.swift */,
 				4BA114A42BEDB26400663C7F /* ChallengesView.swift */,
+				4B9264B52C0A7E2A00577DAB /* SignUpView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -224,6 +234,7 @@
 			children = (
 				4BA114A22BEDACA000663C7F /* LargeButton.swift */,
 				4BCF6D632C014EB60064D187 /* ProfileForm.swift */,
+				4BF293592C0A959F00836F97 /* Functions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -277,6 +288,7 @@
 				4B0EB54B2BF3D9AB004B47A1 /* AuthManager.swift */,
 				4BFDC8212BFBEF33001E6DED /* UserManager.swift */,
 				4BC330DD2C010E10005FC26C /* UserViewModel.swift */,
+				4B9264B72C0A8B7000577DAB /* ChallengesManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -432,7 +444,9 @@
 				4BA1149B2BEDA14F00663C7F /* StreakView.swift in Sources */,
 				4BCF6D642C014EB60064D187 /* ProfileForm.swift in Sources */,
 				4BA114942BED9E5500663C7F /* HomeView.swift in Sources */,
+				4B9264B82C0A8B7000577DAB /* ChallengesManager.swift in Sources */,
 				4B7837EA2BE9382A0010B8D2 /* wedreamApp.swift in Sources */,
+				4BF2935C2C0D7CD700836F97 /* Content.swift in Sources */,
 				4BFDC8162BFBEBB8001E6DED /* SettingsViewModel.swift in Sources */,
 				4BFDC8222BFBEF33001E6DED /* UserManager.swift in Sources */,
 				4BA114A32BEDACA000663C7F /* LargeButton.swift in Sources */,
@@ -441,8 +455,10 @@
 				4BBB3C882BFBB60200268DF9 /* SignInGoogleHelper.swift in Sources */,
 				4B0EB54C2BF3D9AB004B47A1 /* AuthManager.swift in Sources */,
 				4BFDC81A2BFBEBFE001E6DED /* AuthViewModel.swift in Sources */,
+				4BF2935A2C0A959F00836F97 /* Functions.swift in Sources */,
 				4B0EB5482BF3D350004B47A1 /* AuthView.swift in Sources */,
 				4BC330DE2C010E10005FC26C /* UserViewModel.swift in Sources */,
+				4B9264B62C0A7E2A00577DAB /* SignUpView.swift in Sources */,
 				4B0EB54A2BF3D464004B47A1 /* SignInEmailView.swift in Sources */,
 				4BCF6D622C0141B80064D187 /* HRView.swift in Sources */,
 				4B0EB5502BF421B5004B47A1 /* SettingsView.swift in Sources */,

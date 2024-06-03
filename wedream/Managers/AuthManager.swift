@@ -12,13 +12,11 @@ struct AuthDataResultModel {
     let uid: String // Firebase automatically gives us an unique ID for each user
     let email: String?
     let photoURL: String?
-    let isNewUser: Bool?
     
-    init (user: User, isNewUser: Bool) { // User object comes with FirebaseAuth SDK
+    init (user: User) { // User object comes with FirebaseAuth SDK
         self.uid = user.uid
         self.email = user.email
         self.photoURL = user.photoURL?.absoluteString
-        self.isNewUser = isNewUser
     }
 }
 
@@ -39,7 +37,7 @@ final class AuthManager {
             throw URLError(.badServerResponse) // custom error to be created
         }
         
-        return AuthDataResultModel(user: user, isNewUser: false)
+        return AuthDataResultModel(user: user)
     }
     
     func getProviders() throws -> [AuthProviderOption] {
@@ -73,13 +71,13 @@ extension AuthManager {
     
     func createUser(email: String, password: String) async throws -> AuthDataResultModel {
         let authDataResult = try await Auth.auth().createUser(withEmail: email, password: password)
-        return AuthDataResultModel(user: authDataResult.user, isNewUser: authDataResult.additionalUserInfo?.isNewUser ?? true)
+        return AuthDataResultModel(user: authDataResult.user)
     }
     
     @discardableResult
     func signInUser(email: String, password: String) async throws -> AuthDataResultModel {
         let authDataResult = try await Auth.auth().signIn(withEmail: email, password: password)
-        return AuthDataResultModel(user: authDataResult.user, isNewUser: authDataResult.additionalUserInfo?.isNewUser ?? true)
+        return AuthDataResultModel(user: authDataResult.user)
     }
     
     func resetPassword(email: String) async throws {
@@ -117,7 +115,7 @@ extension AuthManager {
     
     func signIn(credential: AuthCredential) async throws -> AuthDataResultModel {
         let authDataResult = try await Auth.auth().signIn(with: credential)
-        return AuthDataResultModel(user: authDataResult.user, isNewUser: authDataResult.additionalUserInfo?.isNewUser ?? true)
+        return AuthDataResultModel(user: authDataResult.user)
     }
     
 }

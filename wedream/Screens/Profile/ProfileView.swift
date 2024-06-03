@@ -44,6 +44,7 @@ struct ProfileView: View {
                         Text("User is premium: \((user.isPremium ?? false).description.capitalized)")
                     }
                 }
+                
             }
             .navigationTitle("Profile")
             .toolbar {

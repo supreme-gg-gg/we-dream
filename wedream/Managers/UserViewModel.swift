@@ -13,15 +13,22 @@ final class UserViewModel: ObservableObject {
     @Published private(set) var user: DBUser? = nil
     
     @Published var profileInfo: [String: Any]? = [
-        "name": "",
-        "gender": "",
+        "name": "World",
+        "gender": "Male",
         "age" : 0,
         "sleepGoal" : 7
+    ]
+    
+    // these data are first stored as int (or TimeInterval), but will be converted to or back from string in "00:00" using functions in "Utilities"
+    @Published var sleepTime: [String: Any]? = [
+        "weekly_sleep": 0,
+        "daily_sleep": 0,
     ]
     
     func loadCurrentUser() async throws {
         let authDataResult = try AuthManager.shared.getAuthUser()
         self.user = try await UserManager.shared.getUser(userId: authDataResult.uid) // this automatically gets the user's info
+        self.sleepTime = try await loadSleepTime()
     }
     
     func togglePremiumStatus() {
@@ -55,6 +62,18 @@ final class UserViewModel: ObservableObject {
         Task {
             try await UserManager.shared.updateProfile(userId: user.userId, newProfile: profileInfo)
         }
+    }
+    
+    private func loadSleepTime() async throws -> [String: Any]  {
+        
+        let data = [
+            "daily_sleep": 0,
+            "weekly_sleep": 0
+        ]
+        
+        // Ask Frank to complete here with HealthKit Stuff??
+        
+        return data
     }
     
 }

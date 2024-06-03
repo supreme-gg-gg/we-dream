@@ -12,6 +12,7 @@ struct RootView: View {
     @EnvironmentObject var userVM: UserViewModel
     @State private var showSignInView: Bool = false
     @State private var selectedTab = 2
+    @State private var showSignUpView: Bool = false
     
     var body: some View {
         ZStack {
@@ -24,11 +25,15 @@ struct RootView: View {
                         HRView()
                             .tabItem {
                                 Image(systemName: "trophy.fill")
+                                    .padding(.top, 10)
                                 Text("Honour Roll")
                             }
                             .tag(0)
+                            .background(Color(.white))
+                            
                         
-                        ProfileView(showSignInView: .constant(false))
+                        ProfileView(showSignInView:.constant(false))
+                            .edgesIgnoringSafeArea(.bottom)
                             .tabItem {
                                 Image(systemName: "person.fill")
                                 Text("Profile")
@@ -36,11 +41,13 @@ struct RootView: View {
                             .tag(1)
                         
                         HomeView()
+                            .edgesIgnoringSafeArea(.bottom)
                             .tabItem {
                                 Label("Home", systemImage: "house.fill")
                             }.tag(2)
                         
                         ChallengesView()
+                            .edgesIgnoringSafeArea(.bottom)
                             .tabItem {
                                 Image(systemName: "trophy.fill")
                                 Text("Challenges")
@@ -52,12 +59,16 @@ struct RootView: View {
                                 Text("Social")
                             }.tag(4)
                     }
+                    .fullScreenCover(isPresented: $showSignUpView, content: {
+                        SignUpView(showSignUpView: $showSignUpView)
+                    })
                 }
             }
         }
         .onAppear {
             let authUser = try? AuthManager.shared.getAuthUser()
             self.showSignInView = authUser == nil ? true : false
+            // self.showSignUpView = authUser?.isNewUser == true ? true : false
         }
         .fullScreenCover(isPresented: $showSignInView, content: {
             NavigationView {

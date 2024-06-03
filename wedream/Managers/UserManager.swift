@@ -62,14 +62,15 @@ struct DBUser: Codable {
     
     /// ignore this for now, I used another method below in UserManager for instant update
     /// I might return to this later in case we figured out a way to store data locally efficiently :)
-    mutating func updateXP(by: Int, clear: Bool?) {
+    mutating func updateXP(by: Int, clear: Bool?) -> Int? {
         if (clear ?? false) {
             weeklyXP = 0
-            return
+            return weeklyXP
         }
         var currentXP = weeklyXP ?? 0
         currentXP += by
         weeklyXP = currentXP
+        return weeklyXP
     }
 }
 
@@ -78,19 +79,19 @@ final class UserManager {
     static let shared = UserManager()
     private init() { }
     
-    private let userCollection = Firestore.firestore().collection("users")
+    let userCollection = Firestore.firestore().collection("users")
     
-    private func userDocument(userId: String) -> DocumentReference {
+    func userDocument(userId: String) -> DocumentReference {
         userCollection.document(userId)
     }
     
-    private let encoder: Firestore.Encoder = {
+    let encoder: Firestore.Encoder = {
         let encoder = Firestore.Encoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
         return encoder
     }()
     
-    private let decoder: Firestore.Decoder = {
+    let decoder: Firestore.Decoder = {
         let decoder = Firestore.Decoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
@@ -178,5 +179,4 @@ final class UserManager {
         try await userDocument(userId: userId).updateData(newProfile)
         
     }
-    
 }
