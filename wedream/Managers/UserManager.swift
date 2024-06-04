@@ -107,10 +107,19 @@ final class UserManager {
     func createNewUser(auth: AuthDataResultModel) async throws {
         
         // change the data into the required format (dictionary)
+        // we will leave profile info for now since we update it in SignUp Page
+        
+        // new user loads sleepTime when creating profile, existing user just load sleepTime when loading user (separate function)
+        var sleepData = try await loadSleepTime()
+        
         var userData: [String: Any] = [
             "user_id" : auth.uid,
             "date_created" : Timestamp(),
-            "weeklyXP": 0
+            "weeklyXP": 0,
+            // this is read by sleep_data map, everything else by DBUser
+            "sleep_data": [
+                sleepData
+            ]
         ]
         
         // take care about optionals
@@ -124,12 +133,36 @@ final class UserManager {
         // "set" data will override but "update" only adds fields
         try await userDocument(userId: auth.uid).setData(userData, merge: false)
         
+        // also initialise these two subcollection but they will be filled later
+        userDocument(userId: auth.uid).collection("challnges")
+        
+        try await updateChallenges(userId: auth.uid) // update challenges
+        
+        userDocument(userId: auth.uid).collection("leaderboard")
+        
+        // also add the new user to a leaderboard @FRANK!
+        
     }
     
-    // get the document as a User directly!!
+    // get the document as a User directly!! (only for DBUser)
     func getUser(userId: String) async throws -> DBUser {
+        
         // again, you will need a custom decoder
         try await userDocument(userId: userId).getDocument(as: DBUser.self, decoder: decoder)
+    }
+    
+    /// Used to fetch user profile data or sleep data as dictionaries
+    /// The key must be a document key under "user" document, so "profile_data" or "sleep_time"
+    func fetchMapFromId(userId: String, key: String) async throws -> [String: Any] {
+        
+        let snapshot = try await userDocument(userId: userId).getDocument()
+        
+        // convert the type to a dictoinary & "decode" it
+        guard let data = snapshot.data(), let map = data[key] as? [String: Any] else {
+            throw URLError(.badServerResponse)
+        }
+        
+        return map
     }
     
     /*
@@ -176,7 +209,24 @@ final class UserManager {
     
     func updateProfile(userId: String, newProfile: [String: Any]) async throws {
         
-        try await userDocument(userId: userId).updateData(newProfile)
+        let data : [String: Any] = [
+            "profile_info": newProfile
+        ]
         
+        try await userDocument(userId: userId).setData(data)
+        
+    }
+    
+    /// loads sleep data from HealthKit, NOT from database (that is fetchSleepData and used for leaderboard ranking features and other local functionalities)
+    func loadSleepTime() async throws -> [String: Any]  {
+        
+        let data = [
+            "daily_sleep": 0,
+            "weekly_sleep": 0
+        ]
+        
+        // Ask Frank to complete here with HealthKit Stuff??
+        
+        return data
     }
 }

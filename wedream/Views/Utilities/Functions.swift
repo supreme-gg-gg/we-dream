@@ -34,3 +34,10 @@ func formatDuration(_ duration: Int?) -> String {
     let seconds = duration % 60
     return String(format: "%02d:%02d", minutes, seconds)
 }
+
+func formattedTimeInterval(_ interval: TimeInterval) -> String {
+    let formatter = DateComponentsFormatter()
+    formatter.unitsStyle = .full
+    formatter.allowedUnits = [.hour, .minute, .second]
+    return formatter.string(from: interval) ?? "N/A"
+}

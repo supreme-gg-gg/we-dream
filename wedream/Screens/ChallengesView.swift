@@ -37,6 +37,7 @@ struct ChallengesView: View {
                             return
                         }
                         
+                        // honestly we can just leave it to manual instead of time-based
                         try await UserManager.shared.checkChallengeStatus(for: challenges, user: user)
                     }
                 } label: {
@@ -44,9 +45,8 @@ struct ChallengesView: View {
                         .font(.headline)
                 }
             }
-            
-            // this is just for testing purpose
             ToolbarItem(placement: .navigationBarTrailing) {
+                // this will eventually be weekly
                 Button {
                     Task {
                         guard let user = userVM.user else {
@@ -107,7 +107,6 @@ struct ChallengeRowView: View {
 }
 
 #Preview {
-    
     ChallengesView()
         .environmentObject(UserViewModel())
 }

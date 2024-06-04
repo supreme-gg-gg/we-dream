@@ -17,6 +17,7 @@
 		4B0EB54C2BF3D9AB004B47A1 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0EB54B2BF3D9AB004B47A1 /* AuthManager.swift */; };
 		4B0EB54E2BF41F9F004B47A1 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0EB54D2BF41F9F004B47A1 /* RootView.swift */; };
 		4B0EB5502BF421B5004B47A1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0EB54F2BF421B5004B47A1 /* SettingsView.swift */; };
+		4B4C0A912C0E45BF0082A705 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4C0A902C0E45BF0082A705 /* SliderView.swift */; };
 		4B7837EA2BE9382A0010B8D2 /* wedreamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7837E92BE9382A0010B8D2 /* wedreamApp.swift */; };
 		4B7837EE2BE9382C0010B8D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B7837ED2BE9382C0010B8D2 /* Assets.xcassets */; };
 		4B7837F12BE9382C0010B8D2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B7837F02BE9382C0010B8D2 /* Preview Assets.xcassets */; };
@@ -40,7 +41,6 @@
 		4BCF6D622C0141B80064D187 /* HRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BCF6D612C0141B80064D187 /* HRView.swift */; };
 		4BCF6D642C014EB60064D187 /* ProfileForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BCF6D632C014EB60064D187 /* ProfileForm.swift */; };
 		4BF2935A2C0A959F00836F97 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF293592C0A959F00836F97 /* Functions.swift */; };
-		4BF2935C2C0D7CD700836F97 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF2935B2C0D7CD700836F97 /* Content.swift */; };
 		4BFDC8162BFBEBB8001E6DED /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFDC8152BFBEBB8001E6DED /* SettingsViewModel.swift */; };
 		4BFDC81A2BFBEBFE001E6DED /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFDC8192BFBEBFE001E6DED /* AuthViewModel.swift */; };
 		4BFDC81D2BFBEC31001E6DED /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFDC81C2BFBEC31001E6DED /* ProfileView.swift */; };
@@ -70,6 +70,7 @@
 		4B0EB54B2BF3D9AB004B47A1 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		4B0EB54D2BF41F9F004B47A1 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		4B0EB54F2BF421B5004B47A1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		4B4C0A902C0E45BF0082A705 /* SliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 		4B7837E62BE9382A0010B8D2 /* wedream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wedream.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B7837E92BE9382A0010B8D2 /* wedreamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wedreamApp.swift; sourceTree = "<group>"; };
 		4B7837ED2BE9382C0010B8D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -93,7 +94,6 @@
 		4BCF6D612C0141B80064D187 /* HRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HRView.swift; sourceTree = "<group>"; };
 		4BCF6D632C014EB60064D187 /* ProfileForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileForm.swift; sourceTree = "<group>"; };
 		4BF293592C0A959F00836F97 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
-		4BF2935B2C0D7CD700836F97 /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
 		4BFDC8152BFBEBB8001E6DED /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		4BFDC8192BFBEBFE001E6DED /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		4BFDC81C2BFBEC31001E6DED /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -161,7 +161,6 @@
 				4B7FF7F02BFBAA1A00F8166C /* Info.plist */,
 				4B7FF7F12BFBAA6800F8166C /* GoogleService-Info.plist */,
 				4B7837E92BE9382A0010B8D2 /* wedreamApp.swift */,
-				4BF2935B2C0D7CD700836F97 /* Content.swift */,
 				4BA114992BEDA13A00663C7F /* Views */,
 				4BA114972BEDA10A00663C7F /* Screens */,
 				4B7837ED2BE9382C0010B8D2 /* Assets.xcassets */,
@@ -223,6 +222,7 @@
 		4BA114A02BEDAC7F00663C7F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4B4C0A902C0E45BF0082A705 /* SliderView.swift */,
 				4BA1149A2BEDA14F00663C7F /* StreakView.swift */,
 				4BA1149C2BEDA16200663C7F /* XPView.swift */,
 			);
@@ -446,7 +446,6 @@
 				4BA114942BED9E5500663C7F /* HomeView.swift in Sources */,
 				4B9264B82C0A8B7000577DAB /* ChallengesManager.swift in Sources */,
 				4B7837EA2BE9382A0010B8D2 /* wedreamApp.swift in Sources */,
-				4BF2935C2C0D7CD700836F97 /* Content.swift in Sources */,
 				4BFDC8162BFBEBB8001E6DED /* SettingsViewModel.swift in Sources */,
 				4BFDC8222BFBEF33001E6DED /* UserManager.swift in Sources */,
 				4BA114A32BEDACA000663C7F /* LargeButton.swift in Sources */,
@@ -460,6 +459,7 @@
 				4BC330DE2C010E10005FC26C /* UserViewModel.swift in Sources */,
 				4B9264B62C0A7E2A00577DAB /* SignUpView.swift in Sources */,
 				4B0EB54A2BF3D464004B47A1 /* SignInEmailView.swift in Sources */,
+				4B4C0A912C0E45BF0082A705 /* SliderView.swift in Sources */,
 				4BCF6D622C0141B80064D187 /* HRView.swift in Sources */,
 				4B0EB5502BF421B5004B47A1 /* SettingsView.swift in Sources */,
 			);

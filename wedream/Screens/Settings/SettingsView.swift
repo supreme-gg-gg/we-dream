@@ -14,35 +14,31 @@ struct SettingsView: View {
     @Binding var showSignInView: Bool
     
     var body: some View {
+        
+        // this looks quite bad as two segments on the page, FIX IT!
         VStack {
-            
-        }
-        List {
-            Button("Log out") {
-                Task {
-                    do {
-                        try viewModel.logOut()
-                        showSignInView = true // return to signin screen
-                    } catch {
-                        print(error)
+            List {
+                Button("Log out") {
+                    Task {
+                        do {
+                            try viewModel.logOut()
+                            showSignInView = true // return to signin screen
+                        } catch {
+                            print(error)
+                        }
                     }
                 }
-            }
-            
-            if viewModel.authProviders.contains(.email) {
-                emailSection
-            }
-            
-            Section(header: Text("Profile")) {
-                VStack {
-                    ProfileForm(userVM: userVM)
+                
+                if viewModel.authProviders.contains(.email) {
+                    emailSection
                 }
             }
+            .listStyle(GroupedListStyle())
+            .onAppear {
+                viewModel.loadAuthProviders()
+            }
             
-        }
-        .listStyle(GroupedListStyle())
-        .onAppear {
-            viewModel.loadAuthProviders()
+            ProfileForm(userVM: userVM)
         }
         .navigationTitle("Settings")
      }

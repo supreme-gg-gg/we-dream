@@ -17,23 +17,23 @@ struct RootView: View {
     var body: some View {
         ZStack {
             if !showSignInView {
+                
                 // only draw it when signed in
-                NavigationStack {
-                    
-                    TabView (selection: $selectedTab) {
+                TabView (selection: $selectedTab) {
+                        
+                    NavigationStack {
                         
                         HRView()
                             .tabItem {
                                 Image(systemName: "trophy.fill")
-                                    .padding(.top, 10)
                                 Text("Honour Roll")
                             }
+                            .safeAreaPadding(.bottom)
+                            .background(Color(.gray))
                             .tag(0)
-                            .background(Color(.white))
-                            
                         
-                        ProfileView(showSignInView:.constant(false))
-                            .edgesIgnoringSafeArea(.bottom)
+                        ProfileView(showSignInView: $showSignInView)
+                            .safeAreaPadding(.bottom)
                             .tabItem {
                                 Image(systemName: "person.fill")
                                 Text("Profile")
@@ -41,19 +41,20 @@ struct RootView: View {
                             .tag(1)
                         
                         HomeView()
-                            .edgesIgnoringSafeArea(.bottom)
+                            .safeAreaPadding(.bottom)
                             .tabItem {
                                 Label("Home", systemImage: "house.fill")
                             }.tag(2)
                         
                         ChallengesView()
-                            .edgesIgnoringSafeArea(.bottom)
+                            .safeAreaPadding(.bottom)
                             .tabItem {
                                 Image(systemName: "trophy.fill")
                                 Text("Challenges")
                             }.tag(3)
                         
                         Text("Social page")
+                            .safeAreaPadding(.bottom)
                             .tabItem {
                                 Image(systemName: "person.2.fill")
                                 Text("Social")
