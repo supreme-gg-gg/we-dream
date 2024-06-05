@@ -15,40 +15,115 @@ struct SettingsView: View {
     
     var body: some View {
         
-        // this looks quite bad as two segments on the page, FIX IT!
-        VStack {
+        NavigationView {
             List {
-                Button("Log out") {
-                    Task {
-                        do {
-                            try viewModel.logOut()
-                            showSignInView = true // return to signin screen
-                        } catch {
-                            print(error)
+                Section {
+                    HStack {
+                        Text("\(userVM.profileInfo?["name"] ?? "HW")") // find an actual way to get the initials
+                            .font(.title)
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.white)
+                            .frame(width: 72, height: 72)
+                            .background(Color(.blueDark))
+                            .clipShape(Circle())
+                        
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("\(userVM.profileInfo?["name"] ?? "Hello World")")
+                                .font(.title3)
+                                .fontWeight(.semibold)
+                                .padding(.top, 4)
+                            
+                            Text("\(userVM.user?.email ?? "User email N/A")")
+                                .font(.footnote)
+                                .accentColor(.blue)
                         }
+                        .padding(.leading, 10)
                     }
                 }
                 
-                if viewModel.authProviders.contains(.email) {
-                    emailSection
+                Section("General") {
+                    HStack {
+                        SettingsRowView(imageName: "gear", title: "Version", tintColor: Color(.systemGray))
+                        
+                        Spacer()
+                        
+                        Text("Beta Pre-release")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                    }
                 }
+                
+                Section("Account") {
+                    Button {
+                        Task {
+                            do {
+                                try viewModel.logOut()
+                                showSignInView = true // return to signin screen
+                            } catch {
+                                print(error)
+                            }
+                        }
+                    } label: {
+                        SettingsRowView(imageName: "arrow.left.circle.fill", title: "Sign Out", tintColor: .red)
+                    }
+                    
+                    Button {
+                        print("Delete account...")
+                    } label: {
+                        SettingsRowView(imageName: "xmark.circle.fill", title: "Delete account", tintColor: .red)
+                    }
+                    
+                }
+                
+                if viewModel.authProviders.contains(.email) {
+                    
+                    Section("Email users") {
+                        emailSection
+                    }
+                    
+                }
+                
+                Section("User Profile") {
+                    // ProfileForm(userVM: userVM)
+                }
+                
+                
             }
-            .listStyle(GroupedListStyle())
+            .navigationTitle("Settings")
             .onAppear {
                 viewModel.loadAuthProviders()
             }
-            
-            ProfileForm(userVM: userVM)
         }
-        .navigationTitle("Settings")
-     }
+        
+    }
+}
+
+struct SettingsRowView: View {
+    
+    let imageName: String
+    let title: String
+    let tintColor: Color
+    
+    var body: some View {
+        
+        HStack(spacing: 12) {
+            Image(systemName: imageName)
+                .imageScale(.small)
+                .font(.title)
+                .foregroundColor(tintColor)
+            
+            Text(title)
+                .font(.subheadline)
+                .foregroundStyle(.blueDark)
+        }
+        
+    }
+    
 }
 
 #Preview {
-    NavigationStack {
-        SettingsView(showSignInView: .constant(false))
-            .environmentObject(UserViewModel())
-    }
+    SettingsView(showSignInView: .constant(false))
+        .environmentObject(UserViewModel())
 }
 
 extension SettingsView { // all email features grouped here
@@ -87,8 +162,6 @@ extension SettingsView { // all email features grouped here
                     }
                 }
             }
-        } header: {
-            Text("Email functions")
         }
     }
 }

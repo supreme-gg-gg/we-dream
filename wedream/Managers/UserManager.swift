@@ -12,21 +12,24 @@ import FirebaseFirestoreSwift
 // collection -> documents (can then embed collections again)... explore at console
 
 struct DBUser: Codable {
+    
     let userId: String
     let email: String?
     let photoUrl: String?
     let dateCreated: Date?
     var isPremium: Bool?
     var weeklyXP: Int?
+    var sleepGoal: Int?
     
     // simplifying: creating a convenience initialiser inside here
-    init(auth: AuthDataResultModel) {
+    init(auth: AuthDataResultModel, sleepGoal: Int? = nil) {
         self.userId = auth.uid
         self.email = auth.email
         self.photoUrl = auth.photoURL
         self.dateCreated = Date()
         self.isPremium = false
         self.weeklyXP = 0
+        self.sleepGoal = sleepGoal
     }
     
     init(
@@ -35,7 +38,8 @@ struct DBUser: Codable {
         photoUrl: String? = nil,
         dateCreated: Date? = nil,
         isPremium: Bool? = nil,
-        weeklyXP: Int
+        weeklyXP: Int? = nil,
+        sleepGoal: Int? = nil
     ) {
         self.userId = userId
         self.email = email
@@ -43,6 +47,7 @@ struct DBUser: Codable {
         self.dateCreated = dateCreated
         self.isPremium = isPremium
         self.weeklyXP = weeklyXP
+        self.sleepGoal = sleepGoal
     }
     
     // For method 1 (update struct)
@@ -54,14 +59,14 @@ struct DBUser: Codable {
         return DBUser(userId: userId, email: email, photoUrl: photoUrl, dateCreated: dateCreated, isPremium: !currentValue)
     } */
     
+    /*
     // For method 2 (mutate struct)
     mutating func updatePremiumStatus() {
         let currentValue = isPremium ?? false
         isPremium = !currentValue
     }
     
-    /// ignore this for now, I used another method below in UserManager for instant update
-    /// I might return to this later in case we figured out a way to store data locally efficiently :)
+    /// Calling these mutating functions directly will not work since "user: DBUser" is declared in a class UserVM. So you need to call the function in UserVM that will then call this function
     mutating func updateXP(by: Int, clear: Bool?) -> Int? {
         if (clear ?? false) {
             weeklyXP = 0
@@ -72,6 +77,11 @@ struct DBUser: Codable {
         weeklyXP = currentXP
         return weeklyXP
     }
+    
+    mutating func updateSleepGoal(to newGoal: Int) {
+        self.sleepGoal = newGoal
+        
+    } */
 }
 
 final class UserManager {
@@ -85,6 +95,8 @@ final class UserManager {
         userCollection.document(userId)
     }
     
+    // customised encoder needed to change the key case ("dateCreated -> date_created")
+    // to avoid complication for most cases we will just use a_b manually for the keys (sad)
     let encoder: Firestore.Encoder = {
         let encoder = Firestore.Encoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
@@ -97,29 +109,46 @@ final class UserManager {
         return decoder
     }()
     
-    // same function but push the user itself rather than creating dictionary!
-    func createNewUser(user: DBUser) async throws {
+    /// creates new user documents and fields and subcollections (both user, profileInfo, and sleepData). However, only sleepData working now, checked other two raw value no problem. Critical error here MUST BE FIXED
+    func createNewUser(user: DBUser, profileInfo: [String: Any]? = nil) async throws {
+        
+        // set the basic user data
         try userDocument(userId: user.userId).setData(from: user, merge: false, encoder: encoder)
         
-        // customised encoder needed to change the key case ("dateCreated -> date_created")
+        // [String: Any] is not encodable, and we are lazy to make another struct lol
+        if let p = profileInfo {
+            try await userDocument(userId: user.userId).setData(["profile_info": p], merge: false)
+        }
+        
+        // new user loads sleepTime when creating profile, existing user just load sleepTime when loading user (separate function)
+        let sleepData = try await loadSleepTime()
+        // recall that sleep data itself is a dictionary returned by loadSleepTime()!
+        try await userDocument(userId: user.userId).setData(["sleep_data": sleepData])
+        
+        // now initialise the challenges subcollection and get things going!
+        try await updateChallenges(userId: user.userId) // update challenges
+        
+        // userDocument(userId: user.userId).collection("leaderboard").addDocuments(...)
+        
+        // also add the new user to a leaderboard @FRANK!
     }
     
+    /// we will rarely use this with AuthDataResultModel since it provides so little data, we generally convert it first to DBUser and create user in DB together with additional maps/fields we need. DO NOT use this function it probably doesn't work, you MUST use the version with user and profileInfo (which is called in SignUp function)
     func createNewUser(auth: AuthDataResultModel) async throws {
         
         // change the data into the required format (dictionary)
-        // we will leave profile info for now since we update it in SignUp Page
         
-        // new user loads sleepTime when creating profile, existing user just load sleepTime when loading user (separate function)
-        var sleepData = try await loadSleepTime()
+        let sleepData = try await loadSleepTime()
         
         var userData: [String: Any] = [
             "user_id" : auth.uid,
             "date_created" : Timestamp(),
-            "weeklyXP": 0,
+            "weekly_xp": 0,
             // this is read by sleep_data map, everything else by DBUser
             "sleep_data": [
                 sleepData
-            ]
+            ],
+            "sleep_goal": 7
         ]
         
         // take care about optionals
@@ -188,6 +217,15 @@ final class UserManager {
     } */
     
     // a better solution: update only the changed field
+    
+    /// This single function is capable of handling almost all types of regular database writes, be ware of what data you are passing in though. This CANNOT set data, it only updates existing values
+    func updateDatabase(userId: String, key: String, newValue: Any) {
+        
+        userDocument(userId: userId).updateData([key: newValue])
+        
+    }
+    
+    /*
     func updateUserPremiumStatus(userId: String, isPremium: Bool) async throws {
         
         let data: [String: Any] = [
@@ -217,7 +255,13 @@ final class UserManager {
         
     }
     
-    /// loads sleep data from HealthKit, NOT from database (that is fetchSleepData and used for leaderboard ranking features and other local functionalities)
+    func updateSleepGoal(userId: String, user: DBUser, newGoal: Int) async throws {
+        // user.updateSleepGoal(to: newGoal)
+        try await userDocument(userId: userId).updateData(["sleep_goal": newGoal])
+    }
+     */
+    
+    /// loads sleep data from HealthKit and does two things: update the database with the latest changes AND returns the new change locally
     func loadSleepTime() async throws -> [String: Any]  {
         
         let data = [

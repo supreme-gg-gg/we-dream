@@ -14,6 +14,12 @@ final class UserViewModel: ObservableObject {
     
     @Published private(set) var user: DBUser? = nil
     
+    func updateSleepGoal(to newGoal: Int) {
+        guard var user = user else { return }
+        user.sleepGoal = newGoal
+        self.user = user
+    }
+    
     /*
     @Published var profileInfo: [String: Any]? = [
         "name": "World",
@@ -41,29 +47,28 @@ final class UserViewModel: ObservableObject {
         }
     }
     
+    // honestly this is so useless LMAO
     private func initUserVM() async throws {
         if let id = id { // if id exists
             
             // Fetch data for a user with a specific Id (viewing other profiles)
-            // only fetch the necessary profile data
+            // only fetch the necessary profile data (including xp)
             self.profileInfo = try await UserManager.shared.fetchMapFromId(userId: id, key: "profile_info")
             
         } else {
-            
             // Fetch data for the current authenticated user (all data)
             try await loadCurrentUser()
-            if let userId = user?.userId {
-                self.profileInfo = try await UserManager.shared.fetchMapFromId(userId: userId, key: "profile_info")
-            }
         }
     }
     
     func loadCurrentUser() async throws {
         let authDataResult = try AuthManager.shared.getAuthUser()
         self.user = try await UserManager.shared.getUser(userId: authDataResult.uid) // this automatically gets the user's info
+        self.profileInfo = try await UserManager.shared.fetchMapFromId(userId: authDataResult.uid, key: "profile_info")
         self.sleepTime = try await UserManager.shared.loadSleepTime()
     }
     
+    /*
     func togglePremiumStatus() {
         guard let user else { return }
         let currentValue = user.isPremium ?? false
@@ -96,4 +101,6 @@ final class UserViewModel: ObservableObject {
             try await UserManager.shared.updateProfile(userId: user.userId, newProfile: profileInfo)
         }
     }
+     
+     */
 }

@@ -30,30 +30,38 @@ struct ProfileView: View {
     var body: some View {
         
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 20) {
-                    Image("pfp")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 120, height: 120)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                        .shadow(radius: 10)
-                    
-                    if let profile = userVM.profileInfo as? [String: String] {
-                        ProfileInfoView(name: profile["name"] ?? "", gender: profile["gender"] ?? "", age: profile["age"] ?? "")
-                    } else {
-                        Text("No profile info available")
-                            .foregroundColor(.gray)
-                    }
+            // can i add a scroll view here??? List conflict??
+            VStack(spacing: 20) {
+                Image("pfp")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 120, height: 120)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                    .shadow(radius: 10)
+                
+                // user contains private profile info, only dispalyed if it is logged in user
+                if let profile = userVM.profileInfo {
                     
                     if let user = userVM.user {
-                        UserDetailView(userId: user.userId, weeklyXP: user.weeklyXP)
+                        ProfileInfoView(profile: profile, userId: user.userId)
+                            .navigationTitle("Profile")
                     } else {
-                        Text("No user data available")
-                            .foregroundColor(.gray)
+                        ProfileInfoView(profile: profile)
+                            .navigationTitle("Profile")
                     }
                     
+                } else {
+                    Text("No profile info available")
+                        .foregroundColor(.gray)
+                        .navigationTitle("Profile")
+                }
+                /*
+                else {
+                    Text("No user data available")
+                        .foregroundColor(.gray)
+                } */
+                Section("User Sleep Record") {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(Color.gray.opacity(0.1))
                         .frame(height: 200)
@@ -63,9 +71,12 @@ struct ProfileView: View {
                         )
                         .padding(.horizontal)
                 }
-                .padding()
+                
+                Spacer()
+                
             }
-            .navigationTitle("Profile")
+            .padding()
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink {
@@ -75,23 +86,44 @@ struct ProfileView: View {
                             .font(.headline)
                     }
                 }
-            }
+            
         }
     }
 }
 
 struct ProfileInfoView: View {
     
-    var name: String
-    var gender: String
-    var age: String
+    var profile: [String: Any]
+    var userId: String? = nil
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Name: \(name)")
-            Text("Gender: \(gender)")
-            Text("Age: \(age)")
+        
+        // This automatically reads everything in profile_info map since that contains all the public profile info (it can grow no problem)
+        List {
+            ForEach(profile.keys.sorted(), id: \.self) { key in
+                if let value = profile[key] {
+                    HStack {
+                        Text("\(key.capitalized):")
+                        Text("\(String(describing: value))")
+                            .foregroundColor(.blueDark)
+                    }
+                }
+            }
+            
+            if let id = userId {
+                VStack {
+                    HStack {
+                        Text("User ID:")
+                        Text(id)
+                            .foregroundColor(.green)
+                    }
+                    Text("For testing purpose only, ID will not be shown to actual user.")
+                        .font(.caption)
+                }
+            }
+            
         }
+        .listStyle(.inset)
     }
 }
 
@@ -102,23 +134,13 @@ struct UserDetailView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
-                Text("User ID:")
-                Text(userId)
-                    .foregroundColor(.blue)
-            }
-            HStack {
-                Text("Your XP:")
-                Text("\(weeklyXP ?? 0)")
-                    .foregroundColor(.green)
-            }
+            
         }
     }
 }
 
 #Preview {
-   // ProfileView(showSignInView: .constant(false))
-        // .environmentObject(UserViewModel())
+   ProfileView(showSignInView: .constant(false)) .environmentObject(UserViewModel())
     
-    LazyProfileView(userId: "9vQY7TwOtBdCNCm1hrYIy8EzoFp1")
+    // LazyProfileView(userId: "9vQY7TwOtBdCNCm1hrYIy8EzoFp1")
 }

@@ -15,39 +15,51 @@ struct AuthView: View {
     @Binding var showingSignInView: Bool
     
     var body: some View {
-        VStack {
-            NavigationLink {
-                SignInEmailView(showSignInView: $showingSignInView)
-            } label: {
-                Text("Sign in with email")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .frame(height: 55)
-                    .frame(maxWidth: .infinity)
-                    .background(.blue)
-                    .cornerRadius(5)
-            }
-            
-            GoogleSignInButton(viewModel: GoogleSignInButtonViewModel(scheme: .dark, style: .wide, state: .normal)) {
-                Task {
-                    do {
-                        try await viewModel.singInGoogle()
-                        showingSignInView = false
-                    } catch {
-                        print(error)
+        NavigationStack {
+        
+            ZStack {
+                
+                Color.blue.ignoresSafeArea()
+                Circle().scale(1.7).foregroundColor(.white.opacity(0.15))
+                Circle().scale(1.35).foregroundColor(.white)
+                
+                VStack {
+                    
+                    Text("Welcome")
+                        .font(.largeTitle)
+                        .bold()
+                        .padding()
+                    
+                    NavigationLink {
+                        LoginView(showSignInView: $showingSignInView)
+                    } label: {
+                        Text("Email and Password")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(width: 300, height: 50)
+                            .background(.blue)
+                            .cornerRadius(10)
                     }
+                    
+                    GoogleSignInButton(viewModel: GoogleSignInButtonViewModel(scheme: .dark, style: .wide, state: .normal)) {
+                        Task {
+                            do {
+                                try await viewModel.singInGoogle()
+                                showingSignInView = false
+                            } catch {
+                                print(error)
+                            }
+                        }
+                    }
+                    .frame(width: 300, height: 50)
+                    .cornerRadius(5)
                 }
+                .navigationBarHidden(true)
             }
         }
-        .padding()
-        .navigationTitle("Sign In")
-        
-        Spacer()
     }
 }
 
 #Preview {
-    NavigationStack {
-        AuthView(showingSignInView: .constant(false))
-    }
+    AuthView(showingSignInView: .constant(false))
 }

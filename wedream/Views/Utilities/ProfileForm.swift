@@ -49,17 +49,33 @@ struct ProfileForm: View {
                 .padding()
             }
             
+            /*
             Section(header: Text("Customise Schedule")) {
                 SliderView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity) // Define maximum dimensions
                     .aspectRatio(contentMode: .fill) // Maintain aspect ratio if needed
                     .clipped()
-            }
+            } */
             
             Button {
                 userVM.profileInfo?["age"] = age
-                userVM.profileInfo?["sleep_goal"] = sleepGoal
-                userVM.updateUserProfile()
+                userVM.updateSleepGoal(to: sleepGoal)
+                
+                // These two are UPDATE functions only, since the initial values should already be there when the account is created
+                
+                guard let userId = userVM.user?.userId else {
+                    print("Invalid User ID")
+                    return
+                }
+                
+                UserManager.shared.updateDatabase(userId: userId, key: "sleep_goal", newValue: sleepGoal)
+                
+                if let profileInfo = userVM.profileInfo {
+                    UserManager.shared.updateDatabase(userId: userId, key: "profile_info", newValue: profileInfo)
+                } else {
+                    print("Profile info is nil")
+                }
+            
             } label: {
                 Text("Save Preferences")
             }

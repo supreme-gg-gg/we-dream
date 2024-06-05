@@ -41,15 +41,15 @@ struct Challenge : Hashable {
 extension UserManager {
     
     private func userChallenges(userId: String) -> CollectionReference {
-        userCollection.document(userId).collection("Challenges")
+        userCollection.document(userId).collection("challenges")
     }
     
-    // call this once a week to update challenges
+    /// call this once a week to update challenges, the function has passed testing and proved to be WORKING WELL!
     func updateChallenges(userId: String) async throws {
         
         let userChallenges = userChallenges(userId: userId)
         
-        let challengesRef = Firestore.firestore().collection("Challenges")
+        let challengesRef = Firestore.firestore().collection("challenges")
         
         // use a list of ids to present the total challenges
         var challenges: [String] = []
@@ -60,7 +60,7 @@ extension UserManager {
             challenges.append(document.documentID)
         }
         
-        // randomly select 4
+        // randomly select 2
         let shuffledChallenges = challenges.shuffled()
         let selectedChallenges = Array(shuffledChallenges.prefix(2))
         
@@ -86,7 +86,7 @@ extension UserManager {
     func loadChallenges(userId: String) async throws -> [Challenge] {
         
         let userChallenges = userChallenges(userId: userId)
-        let challengesRef = Firestore.firestore().collection("Challenges")
+        let challengesRef = Firestore.firestore().collection("challenges")
         
         var activeChallenges: [Challenge] = []
         
@@ -101,6 +101,8 @@ extension UserManager {
             }
             
             let publicChallenge = try await challengesRef.document(challengeRef).getDocument(as: publicChallenge.self, decoder: decoder)
+            
+            // a user challenge has two components, one that is stored publicly in the "library" and constant, and one that is personalised (e.g. completion time, status, deadline, customisation...)
             activeChallenges.append(Challenge(data: publicChallenge, status: completion))
             
         }
