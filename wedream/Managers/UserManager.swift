@@ -67,6 +67,12 @@ struct DBUser: Codable {
     }
     
     /// Calling these mutating functions directly will not work since "user: DBUser" is declared in a class UserVM. So you need to call the function in UserVM that will then call this function
+    
+    mutating func updateSleepGoal(to newGoal: Int) {
+        self.sleepGoal = newGoal
+        
+    } */
+    
     mutating func updateXP(by: Int, clear: Bool?) -> Int? {
         if (clear ?? false) {
             weeklyXP = 0
@@ -78,10 +84,9 @@ struct DBUser: Codable {
         return weeklyXP
     }
     
-    mutating func updateSleepGoal(to newGoal: Int) {
-        self.sleepGoal = newGoal
-        
-    } */
+    mutating func updateXp(to newXp: Int) {
+        self.weeklyXP = newXp
+    }
 }
 
 final class UserManager {
@@ -115,8 +120,11 @@ final class UserManager {
         // set the basic user data
         try userDocument(userId: user.userId).setData(from: user, merge: false, encoder: encoder)
         
+        try await userDocument(userId: user.userId).setData(["sleep_goal": user.sleepGoal ?? 0])
+        
         // [String: Any] is not encodable, and we are lazy to make another struct lol
         if let p = profileInfo {
+            print("Hello I'm setting profile info?")
             try await userDocument(userId: user.userId).setData(["profile_info": p], merge: false)
         }
         
@@ -222,6 +230,25 @@ final class UserManager {
     func updateDatabase(userId: String, key: String, newValue: Any) {
         
         userDocument(userId: userId).updateData([key: newValue])
+        
+    }
+    
+    /// This function ATTEMPTS to update locally the environment object userVM  (the DBUser part of it), the profile part will be fetched again for simplicity lol you can discard the result if you just want to update DB?
+    @discardableResult
+    func updateUserXp(user: DBUser, by xp: Int) -> DBUser {
+        
+        let newXp = (user.weeklyXP ?? 0) + xp
+        userDocument(userId: user.userId).updateData(["weekly_xp" : newXp])
+        userDocument(userId: user.userId).updateData(["profile_info.xp" : newXp])
+        
+        // this is an extremely stupid method since it literally just creates another new massive struct when I just need to change on variable...
+        return DBUser(userId: user.userId,
+                      email: user.email,
+                      photoUrl: user.photoUrl,
+                      dateCreated: user.dateCreated,
+                      isPremium: user.isPremium,
+                      weeklyXP: newXp,
+                      sleepGoal: user.sleepGoal)
         
     }
     

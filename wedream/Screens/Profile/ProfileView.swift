@@ -13,7 +13,6 @@ struct LazyProfileView: View {
     var userId: String
     
     var body: some View {
-        
         ProfileView(showSignInView: .constant(false))
             .environmentObject(UserViewModel(id: userId))
     }
@@ -140,7 +139,7 @@ struct UserDetailView: View {
 }
 
 #Preview {
-   ProfileView(showSignInView: .constant(false)) .environmentObject(UserViewModel())
+   // ProfileView(showSignInView: .constant(false)) .environmentObject(UserViewModel())
     
-    // LazyProfileView(userId: "9vQY7TwOtBdCNCm1hrYIy8EzoFp1")
+    LazyProfileView(userId: "9vQY7TwOtBdCNCm1hrYIy8EzoFp1")
 }

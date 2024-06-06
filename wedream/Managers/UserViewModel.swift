@@ -12,12 +12,16 @@ final class UserViewModel: ObservableObject {
     
     var id : String?
     
-    @Published private(set) var user: DBUser? = nil
+    @Published var user: DBUser? = nil
     
     func updateSleepGoal(to newGoal: Int) {
-        guard var user = user else { return }
-        user.sleepGoal = newGoal
+        guard let user = user else { return }
         self.user = user
+    }
+    
+    func updateUserXp(to newXp: Int) {
+        guard let user = user else {return}
+        self.user?.weeklyXP = newXp
     }
     
     /*

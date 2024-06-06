@@ -1,13 +1,13 @@
-
 //
 //  PlayersView.swift
 //  testhr
 //
 //  Created by zyf on 2024-06-02.
 //
+/*
 import SwiftUI
 
-struct HRView: View {
+struct LeaderboardView: View {
     @StateObject private var viewModel = PlayersViewModel()
 
     var body: some View {
@@ -21,11 +21,8 @@ struct HRView: View {
                     }
 //                }//
             }
-            .navigationTitle("Leaderboard")
+            .navigationTitle("Player Rankings")
         }
     }
 }
-
-#Preview {
-    HRView()
-}
+*/

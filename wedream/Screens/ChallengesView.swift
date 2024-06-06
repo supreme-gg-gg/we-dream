@@ -7,14 +7,11 @@
 
 import SwiftUI
 
+// MARK: FOR TESTIING: Hammer = update challenges ; Arrow = check completion status
 struct ChallengesView: View {
     
     @EnvironmentObject var userVM: UserViewModel
-    @State var challenges: [Challenge] = [Challenge(data: publicChallenge(challengeId: "A", title: "Limit screen time", description: "Reduce screen time after 10pm to less than 30 minutes", xp: 20, criteria: "Type A"), status: false), Challenge(data: publicChallenge(challengeId: "A", title: "Sleep before 10", description: "Sleeping early is good for your health!", xp: 10, criteria: "Type B"), status: true)]
-    
-    // Challenge(data: publicChallenge(challengeId: "A", title: "Limit screen time", description: "Reduce screen time after 10pm to less than 30 minutes", xp: 20, criteria: "Type A"), status: false), Challenge(data: publicChallenge(challengeId: "A", title: "Sleep before 10", description: "Sleeping early is good for your health!", xp: 10, criteria: "Type B"), status: true)
-    
-    // Tested with above data, display and UI works totally fine! If no time to fix just use these sample data LOL
+    @State var challenges: [Challenge] = []
     
     var body: some View {
         NavigationStack {
@@ -34,7 +31,11 @@ struct ChallengesView: View {
                             }
                             
                             // honestly we can just leave it to manual instead of time-based
+                            
                             try await UserManager.shared.checkChallengeStatus(for: challenges, user: user)
+                            
+                            // whenever updated we refresh the screen. HOWEVER THIS IS VERY INEFFICIENT since it keeps fetching the database instead of doing it locally, we need to fix it before release
+                            self.challenges = try await UserManager.shared.loadChallenges(userId: user.userId)
                         }
                     } label: {
                         Image(systemName: "arrow.clockwise.circle.fill")
@@ -50,6 +51,8 @@ struct ChallengesView: View {
                             }
                             
                             try await UserManager.shared.updateChallenges(userId: user.userId)
+                            
+                            self.challenges = try await UserManager.shared.loadChallenges(userId: user.userId)
                         }
                     } label: {
                         Image(systemName: "hammer.circle.fill")
@@ -61,8 +64,6 @@ struct ChallengesView: View {
         .onAppear {
             Task {
                 if let userId = userVM.user?.userId {
-                    print("I am loading challenges right now")
-                    // this should be working fine, the problem is that userVM.user is empty so this statement is skipped lol
                     self.challenges = try await UserManager.shared.loadChallenges(userId: userId)
                 }
             }
@@ -94,13 +95,10 @@ struct ChallengeRowView: View {
                     .font(.subheadline)
                     .foregroundColor(.secondary)
                 
-                HStack {
-                    Text("XP: \(challenge.xp)")
-                        .font(.caption)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color("blue_dark"))
-                }
-                
+                Text("XP: \(challenge.xp)")
+                    .font(.caption)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color("blue_dark"))
             }
             
             Spacer()
@@ -111,7 +109,7 @@ struct ChallengeRowView: View {
                 .padding(.trailing, 10)
         }
         .padding(.all, 20)
-        .background(challenge.completion ? Color("blue_light") : Color(.white))
+        .background(challenge.completion ? Color("blue_light").opacity(0.5) : Color(.white))
         // change the display color based on whether it's completed or not
     }
 }

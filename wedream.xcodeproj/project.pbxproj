@@ -17,7 +17,6 @@
 		4B0EB54C2BF3D9AB004B47A1 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0EB54B2BF3D9AB004B47A1 /* AuthManager.swift */; };
 		4B0EB54E2BF41F9F004B47A1 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0EB54D2BF41F9F004B47A1 /* RootView.swift */; };
 		4B0EB5502BF421B5004B47A1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0EB54F2BF421B5004B47A1 /* SettingsView.swift */; };
-		4B4126DD2C0FCA2300444721 /* ProfileForm2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4126DC2C0FCA2300444721 /* ProfileForm2.swift */; };
 		4B4126DF2C0FD8F700444721 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4126DE2C0FD8F700444721 /* RegisterView.swift */; };
 		4B4126E12C0FD9CF00444721 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4126E02C0FD9CF00444721 /* InputView.swift */; };
 		4B4126E32C0FD9F100444721 /* SignInWithEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4126E22C0FD9F100444721 /* SignInWithEmailView.swift */; };
@@ -44,6 +43,11 @@
 		4BC330DE2C010E10005FC26C /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC330DD2C010E10005FC26C /* UserViewModel.swift */; };
 		4BCF6D622C0141B80064D187 /* HRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BCF6D612C0141B80064D187 /* HRView.swift */; };
 		4BCF6D642C014EB60064D187 /* ProfileForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BCF6D632C014EB60064D187 /* ProfileForm.swift */; };
+		4BD542D52C10DD58008D3588 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD542D42C10DD58008D3588 /* LeaderboardView.swift */; };
+		4BD542D72C10DD6E008D3588 /* player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD542D62C10DD6E008D3588 /* player.swift */; };
+		4BD542D92C10DE71008D3588 /* HealthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD542D82C10DE71008D3588 /* HealthStore.swift */; };
+		4BD542DB2C10DEB6008D3588 /* tempView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD542DA2C10DEB6008D3588 /* tempView.swift */; };
+		4BD542DD2C10DF11008D3588 /* Sleep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD542DC2C10DF11008D3588 /* Sleep.swift */; };
 		4BF2935A2C0A959F00836F97 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF293592C0A959F00836F97 /* Functions.swift */; };
 		4BFDC8162BFBEBB8001E6DED /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFDC8152BFBEBB8001E6DED /* SettingsViewModel.swift */; };
 		4BFDC81A2BFBEBFE001E6DED /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFDC8192BFBEBFE001E6DED /* AuthViewModel.swift */; };
@@ -74,7 +78,6 @@
 		4B0EB54B2BF3D9AB004B47A1 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		4B0EB54D2BF41F9F004B47A1 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		4B0EB54F2BF421B5004B47A1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		4B4126DC2C0FCA2300444721 /* ProfileForm2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileForm2.swift; path = ../../../../../../Downloads/ProfileForm2.swift; sourceTree = "<group>"; };
 		4B4126DE2C0FD8F700444721 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		4B4126E02C0FD9CF00444721 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		4B4126E22C0FD9F100444721 /* SignInWithEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithEmailView.swift; sourceTree = "<group>"; };
@@ -101,6 +104,12 @@
 		4BC330DD2C010E10005FC26C /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		4BCF6D612C0141B80064D187 /* HRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HRView.swift; sourceTree = "<group>"; };
 		4BCF6D632C014EB60064D187 /* ProfileForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileForm.swift; sourceTree = "<group>"; };
+		4BD542D42C10DD58008D3588 /* LeaderboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
+		4BD542D62C10DD6E008D3588 /* player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = player.swift; sourceTree = "<group>"; };
+		4BD542D82C10DE71008D3588 /* HealthStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthStore.swift; sourceTree = "<group>"; };
+		4BD542DA2C10DEB6008D3588 /* tempView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tempView.swift; sourceTree = "<group>"; };
+		4BD542DC2C10DF11008D3588 /* Sleep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sleep.swift; sourceTree = "<group>"; };
+		4BD542DE2C10E1FB008D3588 /* wedream.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wedream.entitlements; sourceTree = "<group>"; };
 		4BF293592C0A959F00836F97 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		4BFDC8152BFBEBB8001E6DED /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		4BFDC8192BFBEBFE001E6DED /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -166,12 +175,14 @@
 		4B7837E82BE9382A0010B8D2 /* wedream */ = {
 			isa = PBXGroup;
 			children = (
+				4BD542DE2C10E1FB008D3588 /* wedream.entitlements */,
 				4B7FF7F02BFBAA1A00F8166C /* Info.plist */,
 				4B7FF7F12BFBAA6800F8166C /* GoogleService-Info.plist */,
 				4B7837E92BE9382A0010B8D2 /* wedreamApp.swift */,
 				4BA114992BEDA13A00663C7F /* Views */,
 				4BA114972BEDA10A00663C7F /* Screens */,
 				4B7837ED2BE9382C0010B8D2 /* Assets.xcassets */,
+				4BD542DF2C10E608008D3588 /* Utilities */,
 				4BFDC8202BFBEF1C001E6DED /* Managers */,
 				4B7837EF2BE9382C0010B8D2 /* Preview Content */,
 			);
@@ -230,6 +241,8 @@
 		4BA114A02BEDAC7F00663C7F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4BD542DA2C10DEB6008D3588 /* tempView.swift */,
+				4BD542D42C10DD58008D3588 /* LeaderboardView.swift */,
 				4B4C0A902C0E45BF0082A705 /* SliderView.swift */,
 				4BA1149A2BEDA14F00663C7F /* StreakView.swift */,
 				4BA1149C2BEDA16200663C7F /* XPView.swift */,
@@ -241,7 +254,6 @@
 			isa = PBXGroup;
 			children = (
 				4BA114A22BEDACA000663C7F /* LargeButton.swift */,
-				4B4126DC2C0FCA2300444721 /* ProfileForm2.swift */,
 				4BCF6D632C014EB60064D187 /* ProfileForm.swift */,
 				4BF293592C0A959F00836F97 /* Functions.swift */,
 				4B4126E02C0FD9CF00444721 /* InputView.swift */,
@@ -254,6 +266,16 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4BD542DF2C10E608008D3588 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				4BD542D82C10DE71008D3588 /* HealthStore.swift */,
+				4BBB3C872BFBB60200268DF9 /* SignInGoogleHelper.swift */,
+				4BD542DC2C10DF11008D3588 /* Sleep.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		4BFDC8142BFBEB8C001E6DED /* Settings */ = {
@@ -296,7 +318,7 @@
 		4BFDC8202BFBEF1C001E6DED /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				4BBB3C872BFBB60200268DF9 /* SignInGoogleHelper.swift */,
+				4BD542D62C10DD6E008D3588 /* player.swift */,
 				4B0EB54B2BF3D9AB004B47A1 /* AuthManager.swift */,
 				4BFDC8212BFBEF33001E6DED /* UserManager.swift */,
 				4BC330DD2C010E10005FC26C /* UserViewModel.swift */,
@@ -453,9 +475,9 @@
 			files = (
 				4BA114A52BEDB26400663C7F /* ChallengesView.swift in Sources */,
 				4BA1149D2BEDA16200663C7F /* XPView.swift in Sources */,
+				4BD542DB2C10DEB6008D3588 /* tempView.swift in Sources */,
 				4BA1149B2BEDA14F00663C7F /* StreakView.swift in Sources */,
 				4BCF6D642C014EB60064D187 /* ProfileForm.swift in Sources */,
-				4B4126DD2C0FCA2300444721 /* ProfileForm2.swift in Sources */,
 				4B4126E32C0FD9F100444721 /* SignInWithEmailView.swift in Sources */,
 				4BA114942BED9E5500663C7F /* HomeView.swift in Sources */,
 				4B9264B82C0A8B7000577DAB /* ChallengesManager.swift in Sources */,
@@ -467,6 +489,7 @@
 				4B0EB54E2BF41F9F004B47A1 /* RootView.swift in Sources */,
 				4BBB3C882BFBB60200268DF9 /* SignInGoogleHelper.swift in Sources */,
 				4B0EB54C2BF3D9AB004B47A1 /* AuthManager.swift in Sources */,
+				4BD542D92C10DE71008D3588 /* HealthStore.swift in Sources */,
 				4BFDC81A2BFBEBFE001E6DED /* AuthViewModel.swift in Sources */,
 				4BF2935A2C0A959F00836F97 /* Functions.swift in Sources */,
 				4B4126E12C0FD9CF00444721 /* InputView.swift in Sources */,
@@ -474,10 +497,13 @@
 				4B4126E52C10005200444721 /* SplashScreenView.swift in Sources */,
 				4BC330DE2C010E10005FC26C /* UserViewModel.swift in Sources */,
 				4B0EB54A2BF3D464004B47A1 /* LoginView.swift in Sources */,
+				4BD542D52C10DD58008D3588 /* LeaderboardView.swift in Sources */,
 				4B4C0A912C0E45BF0082A705 /* SliderView.swift in Sources */,
+				4BD542D72C10DD6E008D3588 /* player.swift in Sources */,
 				4B4126DF2C0FD8F700444721 /* RegisterView.swift in Sources */,
 				4BCF6D622C0141B80064D187 /* HRView.swift in Sources */,
 				4B0EB5502BF421B5004B47A1 /* SettingsView.swift in Sources */,
+				4BD542DD2C10DF11008D3588 /* Sleep.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -638,6 +664,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = wedream/wedream.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"wedream/Preview Content\"";
@@ -647,6 +674,9 @@
 				INFOPLIST_FILE = wedream/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WeDream;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Your data is safe with us :)";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "We are collecting your sleep data for analytics";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "I'm Jet";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -672,6 +702,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = wedream/wedream.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"wedream/Preview Content\"";
@@ -681,6 +712,9 @@
 				INFOPLIST_FILE = wedream/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WeDream;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Your data is safe with us :)";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "We are collecting your sleep data for analytics";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "I'm Jet";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

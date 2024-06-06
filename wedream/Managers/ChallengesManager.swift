@@ -54,10 +54,24 @@ extension UserManager {
         // use a list of ids to present the total challenges
         var challenges: [String] = []
         
-        // yes this is quite dumb but it dynamically gets all challenges LOL
+        // quite inefficient but dynamically updates from the full challenge collection
         let querySnapshot = try await challengesRef.getDocuments()
         for document in querySnapshot.documents {
             challenges.append(document.documentID)
+        }
+        
+        // delete the user challenges (existing) before updating (check deadline too)
+        let userChallengesSnapshot = try await userChallenges.getDocuments()
+        for document in userChallengesSnapshot.documents {
+            let challengeData = document.data()
+            if let deadline = challengeData["deadline"] as? Timestamp {
+                
+                // MARK: FOR TESTING PURPOSE IT WILL BE ALWAYS TEST TO TRUE!
+                if (deadline.dateValue() < Date()) || true {
+                    try await userChallenges.document(document.documentID).delete()
+                    print("Deleted expired challenge with ID: \(document.documentID)")
+                }
+            }
         }
         
         // randomly select 2
@@ -73,12 +87,10 @@ extension UserManager {
                 "deadline": dateOneWeekFromToday()
             ]
             
-            userChallenges.addDocument(data: challengeData) { error in
-                if let error = error {
-                    print("Error adding document: \(error)")
-                } else {
-                    print("Document added successfully")
-                }
+            Task {
+                
+                try await userChallenges.document(challenge).setData(challengeData)
+            
             }
         }
     }
@@ -86,7 +98,6 @@ extension UserManager {
     func loadChallenges(userId: String) async throws -> [Challenge] {
         
         let userChallenges = userChallenges(userId: userId)
-        let challengesRef = Firestore.firestore().collection("challenges")
         
         var activeChallenges: [Challenge] = []
         
@@ -100,7 +111,7 @@ extension UserManager {
                 continue
             }
             
-            let publicChallenge = try await challengesRef.document(challengeRef).getDocument(as: publicChallenge.self, decoder: decoder)
+            let publicChallenge = try await Firestore.firestore().document(challengeRef).getDocument(as: publicChallenge.self, decoder: decoder)
             
             // a user challenge has two components, one that is stored publicly in the "library" and constant, and one that is personalised (e.g. completion time, status, deadline, customisation...)
             activeChallenges.append(Challenge(data: publicChallenge, status: completion))
@@ -121,8 +132,10 @@ extension UserManager {
                 try await userChallenges(userId: user.userId).document(challengeId).updateData(["completion": true])
                 
                 // there is a mutating function inside the user class, but there have been problems with mutability in using that one
-                let newXp = (user.weeklyXP ?? 0) + challenge.xp
-                try await userDocument(userId: user.userId).updateData(["weekly_xp": newXp])
+                
+                // try await userDocument(userId: user.userId).updateData(["weekly_xp": newXp])
+                
+                UserManager.shared.updateUserXp(user: user, by: challenge.xp)
                 
             }
         }
@@ -140,15 +153,15 @@ class ChallengesCompletionHandler {
         switch challenge.criteria {
             
         // Type A = sleep before a certain time?
-        case "TypeA":
+        case "Type A":
             return checkTypeACompletion(challenge)
             
         // Type B = minimise screen time to one hour after 10 pm?
-        case "TypeB":
+        case "Type B":
             return checkTypeBCompletion(challenge)
             
         // Type C = sleep for more than 50 hours a week
-        case "TypeC":
+        case "Type C":
             return checkTypeCCompletion(challenge)
             
         default:
@@ -163,7 +176,7 @@ class ChallengesCompletionHandler {
         // finds when does the person goes to sleep ?
         // or find how long he has slept
         
-        if challenge.completion {
+        if challenge.completion == true {
             return false // for testing I made it a toggle lol
         }
         
@@ -174,7 +187,7 @@ class ChallengesCompletionHandler {
         
         // obtains the screentime during the target time
         
-        if challenge.completion {
+        if challenge.completion == true {
             return false
         }
         
@@ -185,7 +198,7 @@ class ChallengesCompletionHandler {
         
         // check if they slept for a total of xx hours that week?
         
-        if challenge.completion {
+        if challenge.completion == true {
             return false
         }
         

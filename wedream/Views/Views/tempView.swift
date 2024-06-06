@@ -1,15 +1,7 @@
-//
-//  StreakView.swift
-//  wedream
-//
-//  Created by Boyuan Jiang on 9/5/2024.
-//
-
-
+/*
 import SwiftUI
-import HealthKit
 
-struct StreakView: View {
+struct tempView: View {
     @State private var healthStore = HealthStore()
     @State private var selectedDate = Date()
     @State private var sleepData: Sleep?
@@ -73,7 +65,7 @@ struct StreakView: View {
         
         if sleepHours >= threshold {
             return .green
-        }
+        } 
         else if sleepHours >= 8.0 * 0.5 {
             return .yellow
         }
@@ -84,8 +76,8 @@ struct StreakView: View {
 }
 
 #Preview {
-    StreakView()
+    tempView()
 }
 
 
-
+*/
