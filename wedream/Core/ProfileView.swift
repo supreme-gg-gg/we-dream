@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// MARK: STILL SOME PROBLEM WITH THE LEADERBOARD PROFILE VIEW, SOME RANDOM PADDING IS WRONG!
+
 /// for users to view other's profile by only providing the userId, it will load the other user's public profile and builds a new profile view using that
 struct LazyProfileView: View {
     
@@ -29,6 +31,7 @@ struct ProfileView: View {
     var body: some View {
         
         NavigationStack {
+            
             // can i add a scroll view here??? List conflict??
             VStack(spacing: 20) {
                 Image("pfp")
@@ -42,12 +45,30 @@ struct ProfileView: View {
                 // user contains private profile info, only dispalyed if it is logged in user
                 if let profile = userVM.profileInfo {
                     
+                    // this is an actual logged in user because he has a FULL view model
                     if let user = userVM.user {
                         ProfileInfoView(profile: profile, userId: user.userId)
                             .navigationTitle("Profile")
+                            .toolbar {
+                                ToolbarItem(placement: .navigationBarTrailing) {
+                                    NavigationLink {
+                                        SettingsView(showSignInView: $showSignInView)
+                                    } label: {
+                                        Image(systemName: "gear")
+                                            .font(.headline)
+                                    }
+                                }
+                            }
                     } else {
                         ProfileInfoView(profile: profile)
                             .navigationTitle("Profile")
+                            .navigationBarTitleDisplayMode(.inline)
+                            .toolbar {
+                                // Set toolbar to nil to hide it
+                                ToolbarItem(placement: .navigationBarTrailing) {
+                                    EmptyView()
+                                }
+                            }
                     }
                     
                 } else {
@@ -75,17 +96,6 @@ struct ProfileView: View {
                 
             }
             .padding()
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink {
-                        SettingsView(showSignInView: $showSignInView)
-                    } label: {
-                        Image(systemName: "gear")
-                            .font(.headline)
-                    }
-                }
-            
         }
     }
 }
@@ -114,27 +124,16 @@ struct ProfileInfoView: View {
                     HStack {
                         Text("User ID:")
                         Text(id)
+                            .font(.caption)
                             .foregroundColor(.green)
                     }
                     Text("For testing purpose only, ID will not be shown to actual user.")
-                        .font(.caption)
+                        .font(.caption2)
                 }
             }
             
         }
         .listStyle(.inset)
-    }
-}
-
-struct UserDetailView: View {
-    
-    var userId: String
-    var weeklyXP: Int?
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            
-        }
     }
 }
 

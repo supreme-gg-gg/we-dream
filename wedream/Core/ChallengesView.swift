@@ -11,7 +11,16 @@ import SwiftUI
 struct ChallengesView: View {
     
     @EnvironmentObject var userVM: UserViewModel
-    @State var challenges: [Challenge] = []
+    @State var challenges: [Challenge] = [Challenge(data: publicChallenge(challengeId: "", title: "A", description: "A", xp: 1, criteria: "A"), status: false)]
+    
+    // a stupid and failed attempt to modify navigation bar, I hate this thing so much it is a nightmare to style OMG
+    /*
+    init() {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .systemBackground
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+    } */
     
     var body: some View {
         NavigationStack {
@@ -22,7 +31,6 @@ struct ChallengesView: View {
                 }
             }
             .navigationTitle("Challenges")
-            .padding(.top, 20)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
@@ -62,6 +70,8 @@ struct ChallengesView: View {
                 }
             }
         }
+        .ignoresSafeArea(edges: .top)
+        .background(Color.gray)
         .onAppear {
             Task {
                 if let userId = userVM.user?.userId {
@@ -110,7 +120,7 @@ struct ChallengeRowView: View {
                 .padding(.trailing, 10)
         }
         .padding(.all, 20)
-        .background(challenge.completion ? Color("blue_light").opacity(0.5) : Color(.white))
+        .background(challenge.completion ? Color("blue_light").opacity(0.3) : Color(.white))
         // change the display color based on whether it's completed or not
     }
 }

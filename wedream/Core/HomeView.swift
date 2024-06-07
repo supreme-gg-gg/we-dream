@@ -50,6 +50,7 @@ struct HomeView: View {
                             .frame(width: 200, height: 200)
                         
                         // Sleep Time Display
+                        // MARK: BIG BUG HERE, cannot run a func to convert TimeInterval to String :cry
                         Text("\(userVM.sleepTime?["daily_sleep"] ?? "00:00")")
                             .font(.system(size: 64))
                             .fontWeight(.black)
@@ -117,7 +118,6 @@ struct HomeView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         EmptyView()
                     }
-                
                 }
             
             

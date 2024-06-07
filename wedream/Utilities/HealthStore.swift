@@ -137,7 +137,6 @@ class HealthStore {
         
         healthStore.execute(sleepQuery)
         
-        print(sleepData)
         return sleepData
     }
     
