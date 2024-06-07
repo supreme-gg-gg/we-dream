@@ -14,16 +14,6 @@ final class UserViewModel: ObservableObject {
     
     @Published var user: DBUser? = nil
     
-    func updateSleepGoal(to newGoal: Int) {
-        guard let user = user else { return }
-        self.user = user
-    }
-    
-    func updateUserXp(to newXp: Int) {
-        guard let user = user else {return}
-        self.user?.weeklyXP = newXp
-    }
-    
     /*
     @Published var profileInfo: [String: Any]? = [
         "name": "World",
@@ -69,7 +59,22 @@ final class UserViewModel: ObservableObject {
         let authDataResult = try AuthManager.shared.getAuthUser()
         self.user = try await UserManager.shared.getUser(userId: authDataResult.uid) // this automatically gets the user's info
         self.profileInfo = try await UserManager.shared.fetchMapFromId(userId: authDataResult.uid, key: "profile_info")
-        self.sleepTime = try await UserManager.shared.loadSleepTime()
+        self.sleepTime = try await UserManager.shared.loadSleepTime(userId: authDataResult.uid)
+    }
+    
+    func updateSleepGoal(to newGoal: Int) {
+        guard let user = user else { return }
+        self.user = user
+    }
+    
+    func updateUserXp(to newXp: Int) {
+        guard let user = user else {return}
+        self.user?.weeklyXP = newXp
+    }
+    
+    func updateEmail(to newEmail: String) {
+        guard let user = user else {return}
+        self.user?.email = newEmail
     }
     
     /*

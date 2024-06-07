@@ -25,6 +25,8 @@ final class RegisterViewModel: ObservableObject {
             return
         }
         
+        // we checked that data passing (variables) is working no problem here
+        
         let authDataResult = try await AuthManager.shared.createUser(email: email, password: password)
         
         let user = DBUser(auth: authDataResult, sleepGoal: sleepGoal)
@@ -110,8 +112,7 @@ struct RegisterView: View {
                     viewModel.profileInfo = [
                         "name" : name,
                         "gender" : gender,
-                        "age" : age,
-                        "sleep_goal" : sleepGoal
+                        "age" : age
                     ]
                     
                     Task {
@@ -129,7 +130,6 @@ struct RegisterView: View {
                             .font(.headline)
                         Image(systemName: "arrow.right")
                     }
-                    
                 }
                 .foregroundColor(.white)
                 .frame(width: UIScreen.main.bounds.width - 32, height: 50)

@@ -91,6 +91,8 @@ class HealthStore {
     var healthStore: HKHealthStore?
     var lastError: Error?
     
+    static let shared = HealthStore()
+    
     init() {
         if HKHealthStore.isHealthDataAvailable() {
             healthStore = HKHealthStore()
@@ -99,12 +101,13 @@ class HealthStore {
         }
     }
     
-    func calculateSleep(for date: Date) async throws {
-        guard let healthStore = self.healthStore else { return }
+    /// gets the total sleep and deep sleep in the Sleep structure format for the given date (still debugging the date)
+    func calculateSleep(for date: Date) async throws -> Sleep? {
+        guard let healthStore = self.healthStore else { return nil }
         
         let calendar = Calendar(identifier: .gregorian)
         let startDate = calendar.startOfDay(for: date)
-        guard let endDate = calendar.date(byAdding: .day, value: 1, to: startDate) else { return }
+        guard let endDate = calendar.date(byAdding: .day, value: 1, to: startDate) else { return nil }
         
         let sleepSampleType = HKCategoryType(.sleepAnalysis)
         let sleepPredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
@@ -133,6 +136,9 @@ class HealthStore {
         }
         
         healthStore.execute(sleepQuery)
+        
+        print(sleepData)
+        return sleepData
     }
     
     func requestAuthorization() async {

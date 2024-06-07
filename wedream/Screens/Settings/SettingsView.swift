@@ -72,21 +72,43 @@ struct SettingsView: View {
                     } label: {
                         SettingsRowView(imageName: "xmark.circle.fill", title: "Delete account", tintColor: .red)
                     }
-                    
-                }
-                
-                if viewModel.authProviders.contains(.email) {
-                    
-                    Section("Email users") {
-                        emailSection
+                    Button {
+                        Task {
+                            do {
+                                try await viewModel.resetPassword()
+                                print("Password Reset")
+                            } catch {
+                                print(error)
+                            }
+                        }
+                    } label: {
+                        SettingsRowView(imageName: "person.badge.key.fill", title: "Reset Password", tintColor: .red)
                     }
                     
                 }
                 
                 Section("User Profile") {
-                    // ProfileForm(userVM: userVM)
+                    NavigationLink(destination: ProfileForm().environmentObject(userVM)) {
+                        Label(
+                            title: { Text("Update Profile").font(.subheadline)
+                                .foregroundStyle(.blueDark) },
+                            icon: { Image(systemName: "person.crop.circle.fill") }
+                        )
+                    }
+                    
+                    if viewModel.authProviders.contains(.email) {
+                                        
+                        NavigationLink(destination: EmailUpdateForm().environmentObject(userVM)) {
+                            Label(
+                                title: { Text("Update Email and/or Password").font(.subheadline)
+                                    .foregroundStyle(.blueDark) },
+                                icon: { Image(systemName: "envelope.fill") }
+                            )
+                        }
+                        
+                    }
+                    
                 }
-                
                 
             }
             .navigationTitle("Settings")
@@ -126,19 +148,10 @@ struct SettingsRowView: View {
         .environmentObject(UserViewModel())
 }
 
+/*
 extension SettingsView { // all email features grouped here
     private var emailSection: some View {
         Section {
-            Button("Reset Password") {
-                Task {
-                    do {
-                        try await viewModel.resetPassword()
-                        print("Password Reset")
-                    } catch {
-                        print(error)
-                    }
-                }
-            }
             
             Button("Update Password") {
                 Task {
@@ -165,3 +178,4 @@ extension SettingsView { // all email features grouped here
         }
     }
 }
+*/

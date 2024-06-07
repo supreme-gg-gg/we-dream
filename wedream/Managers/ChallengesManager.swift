@@ -176,32 +176,20 @@ class ChallengesCompletionHandler {
         // finds when does the person goes to sleep ?
         // or find how long he has slept
         
-        if challenge.completion == true {
-            return false // for testing I made it a toggle lol
-        }
-        
-        return true
+        return Bool.random() // for testing, it returns true for 50% of the time LOL
     }
     
     private func checkTypeBCompletion(_ challenge: Challenge) -> Bool {
         
         // obtains the screentime during the target time
         
-        if challenge.completion == true {
-            return false
-        }
-        
-        return true
+        return Bool.random()
     }
     
     private func checkTypeCCompletion(_ challenge: Challenge) -> Bool {
         
         // check if they slept for a total of xx hours that week?
         
-        if challenge.completion == true {
-            return false
-        }
-        
-        return true
+        return Bool.random()
     }
 }

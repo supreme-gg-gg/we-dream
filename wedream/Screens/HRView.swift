@@ -12,16 +12,21 @@ struct HRView: View {
 
     var body: some View {
         NavigationView {
-            List(viewModel.players) { player in
-//                NavigationLink(destination: LazyProfileView(userId: player.id)) {//
-                    HStack {
-                        Text(player.name)
-                        Spacer()
-                        Text("\(player.score)")
+            List {
+                ForEach(viewModel.players, id: \.id) { player in
+                    NavigationLink(destination: LazyProfileView(userId: player.id)) {
+                        HStack {
+                            Text(player.name)
+                            Spacer()
+                            Text("\(player.xp)")
+                        }
                     }
-//                }//
+                }
             }
             .navigationTitle("Leaderboard")
+        }
+        .onAppear {
+            viewModel.fetchPlayers() // Fetch leaderboard data when view appears
         }
     }
 }

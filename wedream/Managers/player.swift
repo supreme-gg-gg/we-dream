@@ -8,12 +8,14 @@
 import Foundation
 import Combine
 
+// I quite like this simple structure for fetching the players
+// Found a way to keep it by modifying the return value from backend code instead
+
 struct Player: Identifiable, Codable {
     var id: String
     var name: String
-    var score: Int
+    var xp: Int
 }
-
 
 class PlayersViewModel: ObservableObject {
     @Published var players: [Player] = []
@@ -25,7 +27,7 @@ class PlayersViewModel: ObservableObject {
     }
 
     func fetchPlayers() {
-        guard let url = URL(string: "http://localhost:3000/players") else {
+        guard let url = URL(string: "http://localhost:3000/leaderboard") else {
             return
         }
 

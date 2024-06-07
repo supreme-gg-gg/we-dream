@@ -14,12 +14,12 @@ import FirebaseFirestoreSwift
 struct DBUser: Codable {
     
     let userId: String
-    let email: String?
+    var email: String?
     let photoUrl: String?
     let dateCreated: Date?
     var isPremium: Bool?
     var weeklyXP: Int?
-    var sleepGoal: Int?
+    var sleepGoal: Int? // sleepGoal and other sensitive health preferences will always only be part of your PRIVATE profile, never shown to the PUBLIC
     
     // simplifying: creating a convenience initialiser inside here
     init(auth: AuthDataResultModel, sleepGoal: Int? = nil) {
@@ -115,23 +115,36 @@ final class UserManager {
     }()
     
     /// creates new user documents and fields and subcollections (both user, profileInfo, and sleepData). However, only sleepData working now, checked other two raw value no problem. Critical error here MUST BE FIXED
+    /// when you are using the .setData() function from Firebase, REMEBER to turn on "merge: true" or else it basically removes whatever fields were originally in the document
     func createNewUser(user: DBUser, profileInfo: [String: Any]? = nil) async throws {
         
+        // tested that all input for the function are valid, data is fine!
+        
         // set the basic user data
-        try userDocument(userId: user.userId).setData(from: user, merge: false, encoder: encoder)
+        // try userDocument(userId: user.userId).setData(from: user, merge: false, encoder: encoder)
         
-        try await userDocument(userId: user.userId).setData(["sleep_goal": user.sleepGoal ?? 0])
-        
-        // [String: Any] is not encodable, and we are lazy to make another struct lol
-        if let p = profileInfo {
-            print("Hello I'm setting profile info?")
-            try await userDocument(userId: user.userId).setData(["profile_info": p], merge: false)
+        do {
+            
+            try userDocument(userId: user.userId).setData(from: user, merge: true, encoder: encoder)
+            
+            try await userDocument(userId: user.userId).setData(["sleep_goal": user.sleepGoal ?? 0], merge: true)
+            
+            // [String: Any] is not encodable, and we are lazy to make another struct lol
+            if let p = profileInfo {
+                try await userDocument(userId: user.userId).setData(["profile_info": p], merge: true)
+            }
+            
+            print("User data for \(user.userId) set successfully.")
+            
+        } catch {
+            print("Error setting user data: \(error)")
+            throw error
         }
         
         // new user loads sleepTime when creating profile, existing user just load sleepTime when loading user (separate function)
-        let sleepData = try await loadSleepTime()
+        let sleepData = try await loadSleepTime(userId: user.userId, isNewUser: true)
         // recall that sleep data itself is a dictionary returned by loadSleepTime()!
-        try await userDocument(userId: user.userId).setData(["sleep_data": sleepData])
+        try await userDocument(userId: user.userId).setData(["sleep_data": sleepData], merge: true)
         
         // now initialise the challenges subcollection and get things going!
         try await updateChallenges(userId: user.userId) // update challenges
@@ -146,7 +159,7 @@ final class UserManager {
         
         // change the data into the required format (dictionary)
         
-        let sleepData = try await loadSleepTime()
+        let sleepData = try await loadSleepTime(userId: auth.uid, isNewUser: true)
         
         var userData: [String: Any] = [
             "user_id" : auth.uid,
@@ -288,16 +301,53 @@ final class UserManager {
     }
      */
     
-    /// loads sleep data from HealthKit and does two things: update the database with the latest changes AND returns the new change locally
-    func loadSleepTime() async throws -> [String: Any]  {
+    /// UPDATES sleep data from HealthKit and does two things: update the database with the latest changes AND returns the new change locally. Note that it doesn't only load from HK, but also "updates" (i.e. adds to or clears) the original data from the database and refreshes it. This function should actually be split into two by parameter number one of new user one for regulat LOL
+    func loadSleepTime(userId: String, isNewUser: Bool = false) async throws -> [String: Double]  {
         
-        let data = [
-            "daily_sleep": 0,
-            "weekly_sleep": 0
-        ]
+        // MARK: MISSING REWARD XP EVERY TIME THIS FUNCTION RUNS BASED ON THE NEW DAILY SLEEP!!!
         
-        // Ask Frank to complete here with HealthKit Stuff??
+        // if new user then initialise or else just read original from DB
+        // quite dumb but for the purpose of fetching we must first use [String: Any] and THEN convert it to [String: Double] to return and process it (:cry)
         
-        return data
+        // gets data for today's date (i.e. last night's sleep)
+        let sleepData = try await HealthStore.shared.calculateSleep(for: Date())
+        
+        if let totalDuration = sleepData?.totalDuration {
+            
+            if isNewUser {
+                
+                var data : [String: Double]
+                
+                // for new user just get today and it's done, create func will update DB
+                
+                data = [
+                    "daily_sleep": totalDuration,
+                    "weekly_sleep": totalDuration
+                ]
+
+                return data
+                
+            } else {
+                
+                var data = try await fetchMapFromId(userId: userId, key: "sleep_data")
+                
+                guard var dataDouble = data as? [String: Double] else {
+                    return [:]
+                }
+                
+                // TimeInterval is just a typealias for Double
+                dataDouble["daily_sleep"] = totalDuration
+                dataDouble["weekly_sleep"] = (dataDouble["weekly_sleep"] ?? 0.0) + totalDuration
+                
+                // now let's send it to the database
+                UserManager.shared.updateDatabase(userId: userId, key: "sleep_data", newValue: dataDouble)
+                
+                // and return the value back to be received LOCALLY
+                return dataDouble
+            }
+            
+        }
+        
+        return [:]
     }
 }

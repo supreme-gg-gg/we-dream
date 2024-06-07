@@ -97,7 +97,7 @@ extension AuthManager {
             throw URLError(.badServerResponse)
         }
         
-        try await user.updateEmail(to: email)
+        try await user.sendEmailVerification(beforeUpdatingEmail: email)
     }
 }
 
