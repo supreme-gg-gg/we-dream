@@ -13,3 +13,10 @@ struct Sleep {
     var deepSleepDuration : TimeInterval
     var date : Date
 }
+
+struct SleepData {
+    
+    var totalDuration: TimeInterval
+    var todayDuration: TimeInterval
+    
+}

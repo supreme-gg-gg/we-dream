@@ -11,7 +11,7 @@ import SwiftUI
 struct ChallengesView: View {
     
     @EnvironmentObject var userVM: UserViewModel
-    @State var challenges: [Challenge] = [Challenge(data: publicChallenge(challengeId: "", title: "A", description: "A", xp: 1, criteria: "A"), status: false)]
+    @State var challenges: [Challenge] = []
     
     // a stupid and failed attempt to modify navigation bar, I hate this thing so much it is a nightmare to style OMG
     /*

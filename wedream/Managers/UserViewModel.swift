@@ -59,7 +59,7 @@ final class UserViewModel: ObservableObject {
         let authDataResult = try AuthManager.shared.getAuthUser()
         self.user = try await UserManager.shared.getUser(userId: authDataResult.uid) // this automatically gets the user's info
         self.profileInfo = try await UserManager.shared.fetchMapFromId(userId: authDataResult.uid, key: "profile_info")
-        self.sleepTime = try await UserManager.shared.loadSleepTime(userId: authDataResult.uid)
+        self.sleepTime = await UserManager.shared.loadSleepTime(userId: authDataResult.uid)
     }
     
     func updateSleepGoal(to newGoal: Int) {
