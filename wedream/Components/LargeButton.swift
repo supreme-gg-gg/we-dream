@@ -14,7 +14,7 @@ struct LargeButton: View {
     var destination: AnyView?
     
     var body: some View {
-        NavigationLink (destination: destination ?? AnyView(HomeView())){
+        NavigationLink (destination: destination ?? AnyView(HomeView(showSignInView: .constant(false)))){
             Button {
                 print("pressed")
             } label: {
@@ -29,5 +29,5 @@ struct LargeButton: View {
 }
 
 #Preview {
-    LargeButton(title: "Test title", imageName: "book.fill", destination: AnyView(HomeView()))
+    LargeButton(title: "Test title", imageName: "book.fill", destination: AnyView(HomeView(showSignInView: .constant(false))))
 }

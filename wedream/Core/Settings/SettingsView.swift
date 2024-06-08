@@ -67,6 +67,7 @@ struct SettingsView: View {
                         SettingsRowView(imageName: "arrow.left.circle.fill", title: "Sign Out", tintColor: .red)
                     }
                     
+                    // we don't have a way to delete account yet LOL
                     Button {
                         print("Delete account...")
                     } label: {
