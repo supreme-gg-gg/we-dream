@@ -21,20 +21,21 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct YourApp: App {
    
-  @StateObject private var userVM = UserViewModel() // IS THIS CORRECT??? IDK
+  @StateObject private var userVM = UserViewModel()
     
   // register app delegate for Firebase setup
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
   var body: some Scene {
     WindowGroup {
-      RootView()
-            .environmentObject(userVM)
-            .onAppear {
-                Task {
-                    try await userVM.loadCurrentUser()
-                }
+      SplashScreenView()
+        .environmentObject(userVM)
+        /*
+        .onAppear {
+            Task {
+                try await userVM.loadCurrentUser()
             }
+        } */
     }
   }
 }

@@ -10,27 +10,74 @@ import Foundation
 @MainActor
 final class UserViewModel: ObservableObject {
     
-    @Published private(set) var user: DBUser? = nil
+    var id : String?
     
+    @Published var user: DBUser? = nil
+    
+    /*
     @Published var profileInfo: [String: Any]? = [
         "name": "World",
         "gender": "Male",
         "age" : 0,
-        "sleepGoal" : 7
+        "sleep_goal" : 7
     ]
     
     // these data are first stored as int (or TimeInterval), but will be converted to or back from string in "00:00" using functions in "Utilities"
     @Published var sleepTime: [String: Any]? = [
         "weekly_sleep": 0,
-        "daily_sleep": 0,
-    ]
+        "daily_sleep" : 0
+    ] */
+    
+    @Published var profileInfo: [String: Any]? = nil
+    
+    @Published var sleepTime: [String: Any]? = nil
+    
+    init(id : String? = nil) {
+        
+        self.id = id
+        
+        Task {
+            try await initUserVM()
+        }
+    }
+    
+    // honestly this is so useless LMAO
+    private func initUserVM() async throws {
+        if let id = id { // if id exists
+            
+            // Fetch data for a user with a specific Id (viewing other profiles)
+            // only fetch the necessary profile data (including xp)
+            self.profileInfo = try await UserManager.shared.fetchMapFromId(userId: id, key: "profile_info")
+            
+        } else {
+            // Fetch data for the current authenticated user (all data)
+            try await loadCurrentUser()
+        }
+    }
     
     func loadCurrentUser() async throws {
         let authDataResult = try AuthManager.shared.getAuthUser()
         self.user = try await UserManager.shared.getUser(userId: authDataResult.uid) // this automatically gets the user's info
-        self.sleepTime = try await loadSleepTime()
+        self.profileInfo = try await UserManager.shared.fetchMapFromId(userId: authDataResult.uid, key: "profile_info")
+        self.sleepTime = try await UserManager.shared.loadSleepTime(userId: authDataResult.uid)
     }
     
+    func updateSleepGoal(to newGoal: Int) {
+        guard let user = user else { return }
+        self.user = user
+    }
+    
+    func updateUserXp(to newXp: Int) {
+        guard let user = user else {return}
+        self.user?.weeklyXP = newXp
+    }
+    
+    func updateEmail(to newEmail: String) {
+        guard let user = user else {return}
+        self.user?.email = newEmail
+    }
+    
+    /*
     func togglePremiumStatus() {
         guard let user else { return }
         let currentValue = user.isPremium ?? false
@@ -63,17 +110,6 @@ final class UserViewModel: ObservableObject {
             try await UserManager.shared.updateProfile(userId: user.userId, newProfile: profileInfo)
         }
     }
-    
-    private func loadSleepTime() async throws -> [String: Any]  {
-        
-        let data = [
-            "daily_sleep": 0,
-            "weekly_sleep": 0
-        ]
-        
-        // Ask Frank to complete here with HealthKit Stuff??
-        
-        return data
-    }
-    
+     
+     */
 }
