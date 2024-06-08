@@ -10,17 +10,19 @@ import SwiftUI
 struct HomeView: View {
     
     @EnvironmentObject var userVM: UserViewModel
+    @Binding var showSignInView: Bool
     
     var body: some View {
         
         NavigationStack {
             
             // Top Navigation Bar
-            HStack(alignment: .center, spacing: 60) {
+            HStack(alignment: .center, spacing: 50) {
                 Spacer()
                 NavBarItem(destination: AnyView(StreakView()), title: "Streak", image: "flame.fill")
                 NavBarItem(destination: AnyView(XPView()), title: "XP", image: "moonphase.waxing.crescent")
-                NavBarItem(destination: AnyView(ProfileView(showSignInView: .constant(false))), title: "Profile", image: "person.crop.circle.fill")
+                // NavBarItem(destination: AnyView(ProfileView(showSignInView: $showSignInView)), title: "Profile", image: "person.crop.circle.fill")
+                NavBarItem(destination: AnyView(SettingsView(showSignInView: $showSignInView)), title: "Settings", image: "gear")
                 Spacer()
             }
             .padding(.top, 10)
@@ -192,6 +194,6 @@ struct ArticleBlockView: View {
 }
 
 #Preview {
-    HomeView()
+    HomeView(showSignInView: .constant(false))
         .environmentObject(UserViewModel())
 }

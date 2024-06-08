@@ -12,7 +12,7 @@ struct ProfileForm: View {
     @EnvironmentObject var userVM: UserViewModel
     @State var name: String = ""
     @State var sleepGoal: Int = 0
-    @State var age: Int = 0
+    @State var age: String = ""
     @State var gender: String = ""
     
     var body: some View {
@@ -40,10 +40,14 @@ struct ProfileForm: View {
                     .pickerStyle(SegmentedPickerStyle())
                     .padding()
                     
+                    TextField("Your age", text: $age)
+                    .padding()
+                    
+                    /*
                     Stepper(value: $age, in: 1...100) {
                         Text("Age: \(age)")
                     }
-                    .padding()
+                    .padding() */
                     
                 }
                 
@@ -73,7 +77,7 @@ struct ProfileForm: View {
                     // first update local data
                     userVM.profileInfo?["name"] = name
                     userVM.profileInfo?["gender"] = gender
-                    userVM.profileInfo?["age"] = age
+                    userVM.profileInfo?["age"] = Int(age) ?? 0
                     userVM.user?.sleepGoal = sleepGoal
                     
                     guard let userId = userVM.user?.userId else {
@@ -100,7 +104,7 @@ struct ProfileForm: View {
             .onAppear {
                 if let profileInfo = userVM.profileInfo {
                     name = profileInfo["name"] as? String ?? ""
-                    age = profileInfo["age"] as? Int ?? 0
+                    age = String(profileInfo["age"] as? Int ?? 0)
                     gender = profileInfo["gender"] as? String ?? ""
                 }
                 

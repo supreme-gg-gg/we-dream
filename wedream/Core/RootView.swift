@@ -37,7 +37,7 @@ struct RootView: View {
                         }
                         .tag(1)
                     
-                    HomeView()
+                    HomeView(showSignInView: $showSignInView)
                         .safeAreaPadding(.bottom)
                         .tabItem {
                             Label("Home", systemImage: "house.fill")

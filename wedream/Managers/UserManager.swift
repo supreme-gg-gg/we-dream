@@ -302,7 +302,7 @@ final class UserManager {
      */
     
     /// UPDATES sleep data from HealthKit and does two things: update the database with the latest changes AND returns the new change locally. Note that it doesn't only load from HK, but also "updates" (i.e. adds to or clears) the original data from the database and refreshes it. This function should actually be split into two by parameter number one of new user one for regulat LOL
-    func loadSleepTime(userId: String, isNewUser: Bool = false) async -> [String: Double]  {
+    func loadSleepTime(userId: String, isNewUser: Bool = false) async -> [String: Double] {
         
         // MARK: MISSING REWARD XP EVERY TIME THIS FUNCTION RUNS BASED ON THE NEW DAILY SLEEP!!!
         

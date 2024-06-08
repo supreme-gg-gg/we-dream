@@ -33,7 +33,6 @@
 		4B7FF7F22BFBAA6800F8166C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B7FF7F12BFBAA6800F8166C /* GoogleService-Info.plist */; };
 		4B9264B82C0A8B7000577DAB /* ChallengesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9264B72C0A8B7000577DAB /* ChallengesManager.swift */; };
 		4BA114942BED9E5500663C7F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA114932BED9E5500663C7F /* HomeView.swift */; };
-		4BA1149B2BEDA14F00663C7F /* StreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA1149A2BEDA14F00663C7F /* StreakView.swift */; };
 		4BA1149D2BEDA16200663C7F /* XPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA1149C2BEDA16200663C7F /* XPView.swift */; };
 		4BA114A32BEDACA000663C7F /* LargeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA114A22BEDACA000663C7F /* LargeButton.swift */; };
 		4BA114A52BEDB26400663C7F /* ChallengesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA114A42BEDB26400663C7F /* ChallengesView.swift */; };
@@ -44,8 +43,9 @@
 		4BCF6D622C0141B80064D187 /* HRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BCF6D612C0141B80064D187 /* HRView.swift */; };
 		4BCF6D642C014EB60064D187 /* ProfileForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BCF6D632C014EB60064D187 /* ProfileForm.swift */; };
 		4BD542D72C10DD6E008D3588 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD542D62C10DD6E008D3588 /* PlayerViewModel.swift */; };
-		4BD542D92C10DE71008D3588 /* HealthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD542D82C10DE71008D3588 /* HealthStore.swift */; };
 		4BD542DD2C10DF11008D3588 /* Sleep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD542DC2C10DF11008D3588 /* Sleep.swift */; };
+		4BD542E12C142E36008D3588 /* HealthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD542E02C142E36008D3588 /* HealthStore.swift */; };
+		4BD542E32C142FDB008D3588 /* StreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD542E22C142FDB008D3588 /* StreakView.swift */; };
 		4BF2935A2C0A959F00836F97 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF293592C0A959F00836F97 /* Functions.swift */; };
 		4BFDC8162BFBEBB8001E6DED /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFDC8152BFBEBB8001E6DED /* SettingsViewModel.swift */; };
 		4BFDC81A2BFBEBFE001E6DED /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFDC8192BFBEBFE001E6DED /* AuthViewModel.swift */; };
@@ -94,7 +94,6 @@
 		4B7FF7F12BFBAA6800F8166C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Services/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4B9264B72C0A8B7000577DAB /* ChallengesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengesManager.swift; sourceTree = "<group>"; };
 		4BA114932BED9E5500663C7F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		4BA1149A2BEDA14F00663C7F /* StreakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakView.swift; sourceTree = "<group>"; };
 		4BA1149C2BEDA16200663C7F /* XPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPView.swift; sourceTree = "<group>"; };
 		4BA114A22BEDACA000663C7F /* LargeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeButton.swift; sourceTree = "<group>"; };
 		4BA114A42BEDB26400663C7F /* ChallengesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengesView.swift; sourceTree = "<group>"; };
@@ -103,9 +102,10 @@
 		4BCF6D612C0141B80064D187 /* HRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HRView.swift; sourceTree = "<group>"; };
 		4BCF6D632C014EB60064D187 /* ProfileForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileForm.swift; sourceTree = "<group>"; };
 		4BD542D62C10DD6E008D3588 /* PlayerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
-		4BD542D82C10DE71008D3588 /* HealthStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthStore.swift; sourceTree = "<group>"; };
 		4BD542DC2C10DF11008D3588 /* Sleep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sleep.swift; sourceTree = "<group>"; };
 		4BD542DE2C10E1FB008D3588 /* wedream.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wedream.entitlements; sourceTree = "<group>"; };
+		4BD542E02C142E36008D3588 /* HealthStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthStore.swift; sourceTree = "<group>"; };
+		4BD542E22C142FDB008D3588 /* StreakView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreakView.swift; sourceTree = "<group>"; };
 		4BF293592C0A959F00836F97 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		4BFDC8152BFBEBB8001E6DED /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		4BFDC8192BFBEBFE001E6DED /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -245,7 +245,7 @@
 		4BD542DF2C10E608008D3588 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				4BD542D82C10DE71008D3588 /* HealthStore.swift */,
+				4BD542E02C142E36008D3588 /* HealthStore.swift */,
 				4BBB3C872BFBB60200268DF9 /* SignInGoogleHelper.swift */,
 				4BD542DC2C10DF11008D3588 /* Sleep.swift */,
 				4BF293592C0A959F00836F97 /* Functions.swift */,
@@ -258,7 +258,7 @@
 			children = (
 				4B4126E02C0FD9CF00444721 /* InputView.swift */,
 				4B4C0A902C0E45BF0082A705 /* SliderView.swift */,
-				4BA1149A2BEDA14F00663C7F /* StreakView.swift */,
+				4BD542E22C142FDB008D3588 /* StreakView.swift */,
 				4BA1149C2BEDA16200663C7F /* XPView.swift */,
 			);
 			path = Views;
@@ -453,7 +453,6 @@
 			files = (
 				4BA114A52BEDB26400663C7F /* ChallengesView.swift in Sources */,
 				4BA1149D2BEDA16200663C7F /* XPView.swift in Sources */,
-				4BA1149B2BEDA14F00663C7F /* StreakView.swift in Sources */,
 				4BCF6D642C014EB60064D187 /* ProfileForm.swift in Sources */,
 				4B4126E32C0FD9F100444721 /* SignInWithEmailView.swift in Sources */,
 				4BA114942BED9E5500663C7F /* HomeView.swift in Sources */,
@@ -466,11 +465,12 @@
 				4B0EB54E2BF41F9F004B47A1 /* RootView.swift in Sources */,
 				4BBB3C882BFBB60200268DF9 /* SignInGoogleHelper.swift in Sources */,
 				4B0EB54C2BF3D9AB004B47A1 /* AuthManager.swift in Sources */,
-				4BD542D92C10DE71008D3588 /* HealthStore.swift in Sources */,
+				4BD542E12C142E36008D3588 /* HealthStore.swift in Sources */,
 				4BFDC81A2BFBEBFE001E6DED /* AuthViewModel.swift in Sources */,
 				4BF2935A2C0A959F00836F97 /* Functions.swift in Sources */,
 				4B4126E12C0FD9CF00444721 /* InputView.swift in Sources */,
 				4B0EB5482BF3D350004B47A1 /* AuthView.swift in Sources */,
+				4BD542E32C142FDB008D3588 /* StreakView.swift in Sources */,
 				4B4126E52C10005200444721 /* SplashScreenView.swift in Sources */,
 				4BC330DE2C010E10005FC26C /* UserViewModel.swift in Sources */,
 				4B0EB54A2BF3D464004B47A1 /* LoginView.swift in Sources */,

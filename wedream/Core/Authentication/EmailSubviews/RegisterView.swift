@@ -48,7 +48,7 @@ struct RegisterView: View {
     @Environment(\.dismiss) var dismiss
     @State var name: String = ""
     @State var sleepGoal: Int = 0
-    @State var age: Int = 0
+    @State var age: String = ""
     @State var gender: String = ""
     
     var body: some View {
@@ -68,13 +68,21 @@ struct RegisterView: View {
                     
                     InputView(text: $name, title: "Name", placeholder: "Enter your name")
                     
-                    Picker(selection: $gender, label: Text("Gender")) {
-                        Text("Male").tag("Male")
-                        Text("Female").tag("Female")
-                        Text("Other").tag("Other")
+                    VStack(alignment: .leading) {
+                        Text("Pick your gender")
+                            .font(.caption)
+                            .foregroundStyle(Color(.gray))
+                            .padding(.bottom, 10)
+                        Picker(selection: $gender, label: Text("Gender")) {
+                            Text("Male").tag("Male")
+                            Text("Female").tag("Female")
+                            Text("Other").tag("Other")
+                        }
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     .padding()
+                    
+                    InputView(text: $age, title: "Age", placeholder: "Enter Your age")
                     
                     Stepper(value: $sleepGoal, in: 0...24) {
                         Text("Sleep Goal: \(sleepGoal)")
@@ -83,10 +91,12 @@ struct RegisterView: View {
                             .font(.caption)
                     }
                     .padding()
+                   
+                    /*
                     Stepper(value: $age, in: 1...100) {
                         Text("Age: \(age)")
                     }
-                    .padding()
+                    .padding() */
                     
                     InputView(text: $viewModel.password, title: "Password", placeholder: "Enter your password", isSecureField: true)
                     
@@ -112,7 +122,7 @@ struct RegisterView: View {
                     viewModel.profileInfo = [
                         "name" : name,
                         "gender" : gender,
-                        "age" : age
+                        "age" : Int(age) ?? 0
                     ]
                     
                     Task {
