@@ -70,6 +70,7 @@ struct RootView: View {
             if !showSignInView {
                 Task {
                     try await userVM.loadCurrentUser()
+                    await HealthStore.shared.requestAuthorization()
                 }
             }
         }

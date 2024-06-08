@@ -142,7 +142,7 @@ final class UserManager {
         }
         
         // new user loads sleepTime when creating profile, existing user just load sleepTime when loading user (separate function)
-        let sleepData = try await loadSleepTime(userId: user.userId, isNewUser: true)
+        let sleepData = await loadSleepTime(userId: user.userId, isNewUser: true)
         // recall that sleep data itself is a dictionary returned by loadSleepTime()!
         try await userDocument(userId: user.userId).setData(["sleep_data": sleepData], merge: true)
         
@@ -159,7 +159,7 @@ final class UserManager {
         
         // change the data into the required format (dictionary)
         
-        let sleepData = try await loadSleepTime(userId: auth.uid, isNewUser: true)
+        let sleepData = await loadSleepTime(userId: auth.uid, isNewUser: true)
         
         var userData: [String: Any] = [
             "user_id" : auth.uid,
@@ -302,7 +302,7 @@ final class UserManager {
      */
     
     /// UPDATES sleep data from HealthKit and does two things: update the database with the latest changes AND returns the new change locally. Note that it doesn't only load from HK, but also "updates" (i.e. adds to or clears) the original data from the database and refreshes it. This function should actually be split into two by parameter number one of new user one for regulat LOL
-    func loadSleepTime(userId: String, isNewUser: Bool = false) async throws -> [String: Double]  {
+    func loadSleepTime(userId: String, isNewUser: Bool = false) async -> [String: Double] {
         
         // MARK: MISSING REWARD XP EVERY TIME THIS FUNCTION RUNS BASED ON THE NEW DAILY SLEEP!!!
         
@@ -310,44 +310,23 @@ final class UserManager {
         // quite dumb but for the purpose of fetching we must first use [String: Any] and THEN convert it to [String: Double] to return and process it (:cry)
         
         // gets data for today's date (i.e. last night's sleep)
-        let sleepData = try await HealthStore.shared.calculateSleep(for: Date())
-        
-        if let totalDuration = sleepData?.totalDuration {
-            
-            if isNewUser {
-                
-                var data : [String: Double]
-                
-                // for new user just get today and it's done, create func will update DB
-                
-                data = [
-                    "daily_sleep": totalDuration,
-                    "weekly_sleep": totalDuration
-                ]
+        let sleepData = await HealthStore.shared.fetchSleepData()
 
-                return data
-                
-            } else {
-                
-                var data = try await fetchMapFromId(userId: userId, key: "sleep_data")
-                
-                guard var dataDouble = data as? [String: Double] else {
-                    return [:]
-                }
-                
-                // TimeInterval is just a typealias for Double
-                dataDouble["daily_sleep"] = totalDuration
-                dataDouble["weekly_sleep"] = (dataDouble["weekly_sleep"] ?? 0.0) + totalDuration
-                
-                // now let's send it to the database
-                UserManager.shared.updateDatabase(userId: userId, key: "sleep_data", newValue: dataDouble)
-                
-                // and return the value back to be received LOCALLY
-                return dataDouble
-            }
+        let data : [String: Double] = [
+            "daily_sleep": sleepData?.todayDuration ?? 0.0,
+            "weekly_sleep": sleepData?.totalDuration ?? 0.0
+        ]
+
+        if isNewUser {
+
+            // for new user just get today and it's done, create func will update DB
+            return data
+
+        } else {
             
+            UserManager.shared.updateDatabase(userId: userId, key: "sleep_data", newValue: data)
+            
+            return data
         }
-        
-        return [:]
     }
 }
