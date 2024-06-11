@@ -106,6 +106,27 @@
 		4BD542DE2C10E1FB008D3588 /* wedream.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wedream.entitlements; sourceTree = "<group>"; };
 		4BD542E02C142E36008D3588 /* HealthStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthStore.swift; sourceTree = "<group>"; };
 		4BD542E22C142FDB008D3588 /* StreakView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreakView.swift; sourceTree = "<group>"; };
+		4BDFD8BC2C17E34F00A1F133 /* package.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
+		4BDFD8BD2C17E34F00A1F133 /* package-lock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "package-lock.json"; sourceTree = "<group>"; };
+		4BDFD8BF2C17E35000A1F133 /* index.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
+		4BDFD8C02C17E35000A1F133 /* package.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
+		4BDFD8C12C17E35000A1F133 /* package-lock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "package-lock.json"; sourceTree = "<group>"; };
+		4BDFD8C32C17E35100A1F133 /* .package-lock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ".package-lock.json"; sourceTree = "<group>"; };
+		4BDFD8C52C17E35200A1F133 /* wedream-123-firebase-adminsdk-sbo7g-2e8f5b95f2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "wedream-123-firebase-adminsdk-sbo7g-2e8f5b95f2.json"; sourceTree = "<group>"; };
+		4BDFD8C62C17E35200A1F133 /* .package-lock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ".package-lock.json"; sourceTree = "<group>"; };
+		4BDFD8C82C17E35400A1F133 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		4BDFD8C92C17E35400A1F133 /* index.d.ts */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.typescript; path = index.d.ts; sourceTree = "<group>"; };
+		4BDFD8CA2C17E35500A1F133 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		4BDFD8CB2C17E35500A1F133 /* .eslintrc */ = {isa = PBXFileReference; lastKnownFileType = text; path = .eslintrc; sourceTree = "<group>"; };
+		4BDFD8CC2C17E35500A1F133 /* index.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
+		4BDFD8CD2C17E35500A1F133 /* .nycrc */ = {isa = PBXFileReference; lastKnownFileType = text; path = .nycrc; sourceTree = "<group>"; };
+		4BDFD8CE2C17E35500A1F133 /* package.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
+		4BDFD8CF2C17E35500A1F133 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		4BDFD8D02C17E35500A1F133 /* tsconfig.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = tsconfig.json; sourceTree = "<group>"; };
+		4BDFD8D22C17E35600A1F133 /* index.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
+		4BDFD8D32C17E35600A1F133 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		4BDFD8D42C17E35600A1F133 /* package.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
+		4BDFD8D52C17E35600A1F133 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		4BF293592C0A959F00836F97 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		4BFDC8152BFBEBB8001E6DED /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		4BFDC8192BFBEBFE001E6DED /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -180,6 +201,7 @@
 				4BA114972BEDA10A00663C7F /* Core */,
 				4BFDC8202BFBEF1C001E6DED /* Managers */,
 				4BD542DF2C10E608008D3588 /* Utilities */,
+				4BDFD8BB2C17E34F00A1F133 /* Localhost */,
 				4B7837EF2BE9382C0010B8D2 /* Preview Content */,
 			);
 			path = wedream;
@@ -251,6 +273,82 @@
 				4BF293592C0A959F00836F97 /* Functions.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		4BDFD8BB2C17E34F00A1F133 /* Localhost */ = {
+			isa = PBXGroup;
+			children = (
+				4BDFD8BE2C17E35000A1F133 /* firebase-server */,
+				4BDFD8C22C17E35000A1F133 /* node_modules */,
+				4BDFD8BD2C17E34F00A1F133 /* package-lock.json */,
+				4BDFD8BC2C17E34F00A1F133 /* package.json */,
+			);
+			path = Localhost;
+			sourceTree = "<group>";
+		};
+		4BDFD8BE2C17E35000A1F133 /* firebase-server */ = {
+			isa = PBXGroup;
+			children = (
+				4BDFD8C42C17E35100A1F133 /* node_modules */,
+				4BDFD8BF2C17E35000A1F133 /* index.js */,
+				4BDFD8C12C17E35000A1F133 /* package-lock.json */,
+				4BDFD8C02C17E35000A1F133 /* package.json */,
+			);
+			path = "firebase-server";
+			sourceTree = "<group>";
+		};
+		4BDFD8C22C17E35000A1F133 /* node_modules */ = {
+			isa = PBXGroup;
+			children = (
+				4BDFD8C72C17E35200A1F133 /* es-define-property */,
+				4BDFD8D12C17E35600A1F133 /* escape-html */,
+				4BDFD8D62C17E35600A1F133 /* range-parser */,
+				4BDFD8C32C17E35100A1F133 /* .package-lock.json */,
+			);
+			path = node_modules;
+			sourceTree = "<group>";
+		};
+		4BDFD8C42C17E35100A1F133 /* node_modules */ = {
+			isa = PBXGroup;
+			children = (
+				4BDFD8C62C17E35200A1F133 /* .package-lock.json */,
+				4BDFD8C52C17E35200A1F133 /* wedream-123-firebase-adminsdk-sbo7g-2e8f5b95f2.json */,
+			);
+			path = node_modules;
+			sourceTree = "<group>";
+		};
+		4BDFD8C72C17E35200A1F133 /* es-define-property */ = {
+			isa = PBXGroup;
+			children = (
+				4BDFD8CB2C17E35500A1F133 /* .eslintrc */,
+				4BDFD8CD2C17E35500A1F133 /* .nycrc */,
+				4BDFD8C82C17E35400A1F133 /* CHANGELOG.md */,
+				4BDFD8C92C17E35400A1F133 /* index.d.ts */,
+				4BDFD8CC2C17E35500A1F133 /* index.js */,
+				4BDFD8CA2C17E35500A1F133 /* LICENSE */,
+				4BDFD8CE2C17E35500A1F133 /* package.json */,
+				4BDFD8CF2C17E35500A1F133 /* README.md */,
+				4BDFD8D02C17E35500A1F133 /* tsconfig.json */,
+			);
+			path = "es-define-property";
+			sourceTree = "<group>";
+		};
+		4BDFD8D12C17E35600A1F133 /* escape-html */ = {
+			isa = PBXGroup;
+			children = (
+				4BDFD8D22C17E35600A1F133 /* index.js */,
+				4BDFD8D32C17E35600A1F133 /* LICENSE */,
+				4BDFD8D42C17E35600A1F133 /* package.json */,
+				4BDFD8D52C17E35600A1F133 /* Readme.md */,
+			);
+			path = "escape-html";
+			sourceTree = "<group>";
+		};
+		4BDFD8D62C17E35600A1F133 /* range-parser */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "range-parser";
 			sourceTree = "<group>";
 		};
 		4BEB2C472C12B16700346195 /* Views */ = {

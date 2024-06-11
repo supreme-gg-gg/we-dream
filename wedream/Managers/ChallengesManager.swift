@@ -122,7 +122,8 @@ extension UserManager {
     }
     
     // let's just update these once a day or manually
-    func checkChallengeStatus(for challenges: [Challenge], user: DBUser) async throws {
+    /// Optionally returns new xp is there is change, the receiver (wherever similar in app or challenge view) can just modify environment object where xp is involved acoordingly, the function handles the cloud part by updating up
+    func checkChallengeStatus(for challenges: [Challenge], user: DBUser) async throws -> Double? {
         
         for challenge in challenges {
             
@@ -135,10 +136,12 @@ extension UserManager {
                 
                 // try await userDocument(userId: user.userId).updateData(["weekly_xp": newXp])
                 
-                UserManager.shared.updateUserXp(user: user, by: challenge.xp)
-                
+                return UserManager.shared.updateUserXp(user: user, by: Double(challenge.xp))
             }
         }
+        
+        return nil
+        
     }
     
 }

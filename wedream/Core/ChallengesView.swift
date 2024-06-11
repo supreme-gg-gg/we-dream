@@ -43,10 +43,17 @@ struct ChallengesView: View {
                             
                             // honestly we can just leave it to manual instead of time-based
                             
-                            try await UserManager.shared.checkChallengeStatus(for: challenges, user: user)
+                            print(user.userId)
+                            print(user.weeklyXP)
+                            let newXp = try await UserManager.shared.checkChallengeStatus(for: challenges, user: user)
+                            
+                            if let newXp {
+                                self.userVM.user?.weeklyXP = newXp
+                                self.userVM.profileInfo?["xp"] = newXp
+                            }
                             
                             // whenever updated we refresh the screen. HOWEVER THIS IS VERY INEFFICIENT since it keeps fetching the database instead of doing it locally, we need to fix it before release
-                            self.challenges = try await UserManager.shared.loadChallenges(userId: user.userId)
+                            // self.challenges = try await UserManager.shared.loadChallenges(userId: user.userId)
                         }
                     } label: {
                         Image(systemName: "arrow.clockwise.circle.fill")

@@ -18,7 +18,7 @@ struct DBUser: Codable {
     let photoUrl: String?
     let dateCreated: Date?
     var isPremium: Bool?
-    var weeklyXP: Int?
+    var weeklyXP: Double?
     var sleepGoal: Int? // sleepGoal and other sensitive health preferences will always only be part of your PRIVATE profile, never shown to the PUBLIC
     
     // simplifying: creating a convenience initialiser inside here
@@ -28,7 +28,7 @@ struct DBUser: Codable {
         self.photoUrl = auth.photoURL
         self.dateCreated = Date()
         self.isPremium = false
-        self.weeklyXP = 0
+        self.weeklyXP = 0.0
         self.sleepGoal = sleepGoal
     }
     
@@ -38,7 +38,7 @@ struct DBUser: Codable {
         photoUrl: String? = nil,
         dateCreated: Date? = nil,
         isPremium: Bool? = nil,
-        weeklyXP: Int? = nil,
+        weeklyXP: Double? = nil,
         sleepGoal: Int? = nil
     ) {
         self.userId = userId
@@ -73,6 +73,7 @@ struct DBUser: Codable {
         
     } */
     
+    /*
     mutating func updateXP(by: Int, clear: Bool?) -> Int? {
         if (clear ?? false) {
             weeklyXP = 0
@@ -86,7 +87,7 @@ struct DBUser: Codable {
     
     mutating func updateXp(to newXp: Int) {
         self.weeklyXP = newXp
-    }
+    } */
 }
 
 final class UserManager {
@@ -118,19 +119,31 @@ final class UserManager {
     /// when you are using the .setData() function from Firebase, REMEBER to turn on "merge: true" or else it basically removes whatever fields were originally in the document
     func createNewUser(user: DBUser, profileInfo: [String: Any]? = nil) async throws {
         
+        var mutableUser = user
+        var mutableProfile = profileInfo
+        
         // tested that all input for the function are valid, data is fine!
+        
+        // new user loads sleepTime when creating profile, existing user just load sleepTime when loading user (separate function)
+        let result = await loadSleepTime(userId: user.userId, isNewUser: true)
+        let sleepData = result.0
+        // recall that sleep data itself is a dictionary returned by loadSleepTime()!
+        try await userDocument(userId: user.userId).setData(["sleep_data": sleepData], merge: true)
+    
+        mutableProfile?["xp"] = result.1
+        mutableUser.weeklyXP = result.1
         
         // set the basic user data
         // try userDocument(userId: user.userId).setData(from: user, merge: false, encoder: encoder)
         
         do {
             
-            try userDocument(userId: user.userId).setData(from: user, merge: true, encoder: encoder)
+            try userDocument(userId: user.userId).setData(from: mutableUser, merge: true, encoder: encoder)
             
-            try await userDocument(userId: user.userId).setData(["sleep_goal": user.sleepGoal ?? 0], merge: true)
+            try await userDocument(userId: user.userId).setData(["sleep_goal": mutableUser.sleepGoal ?? 0], merge: true)
             
             // [String: Any] is not encodable, and we are lazy to make another struct lol
-            if let p = profileInfo {
+            if let p = mutableProfile {
                 try await userDocument(userId: user.userId).setData(["profile_info": p], merge: true)
             }
             
@@ -141,17 +154,10 @@ final class UserManager {
             throw error
         }
         
-        // new user loads sleepTime when creating profile, existing user just load sleepTime when loading user (separate function)
-        let sleepData = await loadSleepTime(userId: user.userId, isNewUser: true)
-        // recall that sleep data itself is a dictionary returned by loadSleepTime()!
-        try await userDocument(userId: user.userId).setData(["sleep_data": sleepData], merge: true)
-        
         // now initialise the challenges subcollection and get things going!
         try await updateChallenges(userId: user.userId) // update challenges
         
         // userDocument(userId: user.userId).collection("leaderboard").addDocuments(...)
-        
-        // also add the new user to a leaderboard @FRANK!
     }
     
     /// we will rarely use this with AuthDataResultModel since it provides so little data, we generally convert it first to DBUser and create user in DB together with additional maps/fields we need. DO NOT use this function it probably doesn't work, you MUST use the version with user and profileInfo (which is called in SignUp function)
@@ -246,23 +252,17 @@ final class UserManager {
         
     }
     
-    /// This function ATTEMPTS to update locally the environment object userVM  (the DBUser part of it), the profile part will be fetched again for simplicity lol you can discard the result if you just want to update DB?
-    @discardableResult
-    func updateUserXp(user: DBUser, by xp: Int) -> DBUser {
+    /// This function works with ALL IN-APP XP updates, so that does not count sleep data xp which is handled by loadSleepData. It returns an xp for userVM update
+    // @discardableResult
+    func updateUserXp(user: DBUser, by xp: Double) -> Double {
         
+        print(user.weeklyXP)
         let newXp = (user.weeklyXP ?? 0) + xp
+        print(newXp)
         userDocument(userId: user.userId).updateData(["weekly_xp" : newXp])
         userDocument(userId: user.userId).updateData(["profile_info.xp" : newXp])
         
-        // this is an extremely stupid method since it literally just creates another new massive struct when I just need to change on variable...
-        return DBUser(userId: user.userId,
-                      email: user.email,
-                      photoUrl: user.photoUrl,
-                      dateCreated: user.dateCreated,
-                      isPremium: user.isPremium,
-                      weeklyXP: newXp,
-                      sleepGoal: user.sleepGoal)
-        
+        return newXp
     }
     
     /*
@@ -301,8 +301,8 @@ final class UserManager {
     }
      */
     
-    /// UPDATES sleep data from HealthKit and does two things: update the database with the latest changes AND returns the new change locally. Note that it doesn't only load from HK, but also "updates" (i.e. adds to or clears) the original data from the database and refreshes it. This function should actually be split into two by parameter number one of new user one for regulat LOL
-    func loadSleepTime(userId: String, isNewUser: Bool = false) async -> [String: Double] {
+    /// UPDATES sleep data from HealthKit and does two things: update the database with the latest changes AND returns the new change locally. Note that it doesn't only load from HK, but also "updates" (i.e. adds to or clears) the original data from the database and refreshes it. This function should actually be split into two by parameter number one of new user one for regulat LOL. The function also rewards XP directly whenever it is called, since it is only called at the app opens.
+    func loadSleepTime(userId: String, isNewUser: Bool = false) async -> ([String: Double], Double) {
         
         // MARK: MISSING REWARD XP EVERY TIME THIS FUNCTION RUNS BASED ON THE NEW DAILY SLEEP!!!
         
@@ -317,10 +317,12 @@ final class UserManager {
             "weekly_sleep": sleepData?.totalDuration ?? 0.0
         ]
         
+        let weeklyNewXP = (data["weekly_sleep"] ?? 0.0) / 3600 * 10
+        
         if isNewUser {
             
             // for new user just get today and it's done, create func will update DB
-            return data
+            return (data, weeklyNewXP)
             
         } else {
             
@@ -332,11 +334,14 @@ final class UserManager {
                 return [:]
             } */
             
-            // now let's send it to the database
+            // now let's send it to the database, and at the same time just update the XP when the app opens LOL saves time
+            // get old XP here??????
             UserManager.shared.updateDatabase(userId: userId, key: "sleep_data", newValue: data)
+            UserManager.shared.updateDatabase(userId: userId, key: "weekly_xp", newValue: weeklyNewXP)
+            UserManager.shared.updateDatabase(userId: userId, key: "profile_info.xp", newValue: weeklyNewXP)
             
             // and return the value back to be received LOCALLY
-            return data
+            return (data, weeklyNewXP)
         }
     }
 }
