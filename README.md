@@ -40,7 +40,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Connect with Our Developers
 
-- [LinkedIn](https://www.linkedin.com/in/jet-chiang/)
-- [LinkedIn](https://www.linkedin.com/in/yifan-zhang-1a6b57269/)
+- [Jet Chiang -- LinkedIn](https://www.linkedin.com/in/jet-chiang/)
+- [Frank Zhang -- LinkedIn](https://www.linkedin.com/in/yifan-zhang-1a6b57269/)
 
 Thank you for choosing WeDream. Together, we can make sleep better for everyone!
