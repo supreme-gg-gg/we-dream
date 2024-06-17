@@ -28,7 +28,7 @@ The project has not been entirely completed so it will not be released to Apple 
 ## Documentation
 
 - [Software Development Document](#)
-- [Project Brief](#)
+- [Project Brief](https://docs.google.com/presentation/d/1dN--nkRTe8h0pQwFc30J1iINycjwKJt6_zqvY2jmzoU/edit?usp=sharing)
 
 ## Feedback
 
