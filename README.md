@@ -26,7 +26,7 @@ Inspired by the engaging features of Duolingo, WeDream motivates users to stay c
 The project has not been entirely completed so it will not be released to Apple Store, but for your own interest feel free to clone the repo and open the project with XCode. You can build it locally with an iOS simulator and test our existing features for inspiration!
 
 ## Documentation
-
+As this project is part of our Grade 12 Computer Science Course, we have attached these documents for high school visitors to learn more about our project and potentially apply our experience in your ICS4U project in the future:
 - [Software Development Document](#)
 - [Project Brief](https://docs.google.com/presentation/d/1dN--nkRTe8h0pQwFc30J1iINycjwKJt6_zqvY2jmzoU/edit?usp=sharing)
 
