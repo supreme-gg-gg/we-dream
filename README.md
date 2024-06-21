@@ -23,16 +23,20 @@ Inspired by the engaging features of Duolingo, WeDream motivates users to stay c
 
 ## Getting Started
 
-The project has not been entirely completed so it will not be released to Apple Store, but for your own interest feel free to clone the repo and open the project with XCode. You can build it locally with an iOS simulator and test our existing features for inspiration!
+The project has not been entirely completed so it will not be released to Apple Store, but for your own interest feel free to clone the repo and open the project with XCode. You can build it locally with an iOS simulator and test our existing features for inspiration! Here are a few points to note:
+
+- **Firebase**: If you are not allowed to access the original database connected due to various reasons such as security rule conflict, please modify the app setup file to connect to your own database.
+- **Leaderboard**: For your convenience, we have attached a version of the Cloud Functions as localhost. Please open the folder with an appropriate editor (e.g. VS Code) and run the "index.js" file inside the "firebase-server" folder.
+- **Firebase Authentication**: We are not responsible for any data leakage and the security of your information. Please do not create an account with a password that you use for other services.
 
 ## Documentation
-As this project is part of our Grade 12 Computer Science Course, we have attached these documents for high school visitors to learn more about our project and potentially apply our experience in your ICS4U project in the future:
+As this project is part of our Grade 12 Computer Science Course, we have attached these documents for high school visitors to learn more about our project and potentially apply our experience in your ICS4U project in the future. Inside the first document, you will also be able to see photos that demonstrate certain features of the app.
 - [Software Development Document](#)
 - [Project Brief](https://docs.google.com/presentation/d/1dN--nkRTe8h0pQwFc30J1iINycjwKJt6_zqvY2jmzoU/edit?usp=sharing)
 
 ## Feedback
 
-We value your feedback! If you have any questions, suggestions, or need support, please reach out to us at [jetjiang.ez@gmail.com](mailto:jetjiang.ez@gmail.com).
+We value your feedback! If you have any questions, or suggestions, or need support, please reach out to us at [jetjiang.ez@gmail.com](mailto:jetjiang.ez@gmail.com).
 
 ## License
 
