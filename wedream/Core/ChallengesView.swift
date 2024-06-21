@@ -15,15 +15,6 @@ struct ChallengesView: View {
     
     // Challenge(data: publicChallenge(challengeId: "", title: "A", description: "A", xp: 1, criteria: "A"), status: false)
     
-    // a stupid and failed attempt to modify navigation bar, I hate this thing so much it is a nightmare to style OMG
-    /*
-    init() {
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .systemBackground
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-    } */
-    
     var body: some View {
         NavigationStack {
             List {
@@ -80,7 +71,6 @@ struct ChallengesView: View {
             }
         }
         .ignoresSafeArea(edges: .top)
-        .background(Color.gray)
         .onAppear {
             Task {
                 if let userId = userVM.user?.userId {
