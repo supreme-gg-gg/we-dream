@@ -36,7 +36,7 @@ As this project is part of our Grade 12 Computer Science Course, we have attache
 
 ## Feedback
 
-We value your feedback! If you have any questions, or suggestions, or need support, please reach out to us at [jetjiang.ez@gmail.com](mailto:jetjiang.ez@gmail.com).
+We value your feedback! If you have any questions, or suggestions, or need support, please reach out to us at [jetjiang.ez@gmail.com](mailto:jetjiang.ez@gmail.com). Please let us know if you want to contribute to the project in any way!
 
 ## License
 
