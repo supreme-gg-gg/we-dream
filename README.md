@@ -23,14 +23,14 @@ Inspired by the engaging features of Duolingo, WeDream motivates users to stay c
 
 ## Getting Started
 
-The project has not been entirely completed so it will not be released to Apple Store, but for your own interest feel free to clone the repo and open the project with XCode. You can build it locally with an iOS simulator and test our existing features for inspiration! Here are a few points to note:
+Due to privacy and financial complications as well as the recurring costs, the project will not be released to the Apps Store in the foreseeable future. However, feel free to fork the main branch and run the project with XCode for your own interest. You can build it locally with an iOS simulator and test our existing features for inspiration! Here are a few points to note:
 
 - **Firebase**: If you are not allowed to access the original database connected due to various reasons such as security rule conflict, please modify the app setup file to connect to your own database.
-- **Leaderboard**: We have attached a version of the Cloud Functions as localhost. Please open the folder with an appropriate editor (e.g. VS Code) and run the "index.js" file inside the "firebase-server" folder.
+- **Leaderboard**: We have attached a version of the Cloud Functions as localhost so that you can just run the index.js file inside "firebase-server". However, please note that since the Google Cloud Service Account auth key must not be made public due to security reasons, you must modify it to suit your own database or rely on the Cloud Functions we have deployed on Google's servers
 - **Firebase Authentication**: We are not responsible for any data leakage and the security of your information. Please do not create an account with a password that you use for other services.
 
 ## Documentation
-As this project is part of our Grade 12 Computer Science Course, we have attached these documents for high school visitors to learn more about our project and potentially apply our experience in your ICS4U project in the future. Inside the first document, you will also be able to see photos that demonstrate certain features of the app.
+As this project is part of our Grade 12 Computer Science Course, we have attached these documents for high school visitors to learn more about our project and potentially apply our experience to your ICS4U project in the future. Inside the first document, you will also be able to see photos that demonstrate certain features of the app.
 - [Software Development Document](#)
 - [Project Brief](https://docs.google.com/presentation/d/1dN--nkRTe8h0pQwFc30J1iINycjwKJt6_zqvY2jmzoU/edit?usp=sharing)
 
