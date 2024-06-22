@@ -102,8 +102,7 @@ struct HomeView: View {
                                 .fill(Color.gray.opacity(0.2))
                                 .frame(height: 200)
                                 .overlay(
-                                    Text("Graphs will appear here")
-                                        .foregroundColor(.secondary)
+                                    ChartView()
                                 )
                                 .padding(.horizontal)
                         }
