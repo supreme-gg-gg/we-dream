@@ -16,6 +16,8 @@ Inspired by the engaging features of Duolingo, WeDream motivates users to stay c
 
 ## Features
 
+You can view sample photos showcasing these feature (real in-app footage) in [this Drive](https://drive.google.com/drive/folders/1jZoSl6NIJjcIptEM12Kf2NEYeehRcchT?usp=sharing).
+
 - **Gamification**: Earn rewards and track your progress as you develop healthier sleep habits.
 - **Social Networking**: Connect with friends and share your achievements to stay motivated.
 - **Real-Time Sleep Data**: Access accurate sleep data from advanced health wearables like Apple Watch and Galaxy Watch.
