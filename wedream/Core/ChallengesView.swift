@@ -23,6 +23,7 @@ struct ChallengesView: View {
                         .listRowInsets(EdgeInsets())
                 }
             }
+            .listStyle(.plain)
             .navigationTitle("Challenges")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

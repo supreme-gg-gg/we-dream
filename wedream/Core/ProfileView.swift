@@ -84,10 +84,9 @@ struct ProfileView: View {
                 Section("User Sleep Record") {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(Color.gray.opacity(0.1))
-                        .frame(height: 200)
+                        .frame(height: 205)
                         .overlay(
-                            Text("Graphs will appear here")
-                                .foregroundColor(.secondary)
+                            ChartView()
                         )
                         .padding(.horizontal)
                 }
