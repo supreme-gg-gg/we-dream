@@ -28,6 +28,8 @@
 		4B7837FB2BE9382C0010B8D2 /* wedreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7837FA2BE9382C0010B8D2 /* wedreamTests.swift */; };
 		4B7838052BE9382C0010B8D2 /* wedreamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7838042BE9382C0010B8D2 /* wedreamUITests.swift */; };
 		4B7838072BE9382C0010B8D2 /* wedreamUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7838062BE9382C0010B8D2 /* wedreamUITestsLaunchTests.swift */; };
+		4B7CDD0B2C264643001EE8ED /* StreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7CDD0A2C264643001EE8ED /* StreakView.swift */; };
+		4B7CDD0D2C2646DF001EE8ED /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7CDD0C2C2646DF001EE8ED /* DateHelper.swift */; };
 		4B7FF7ED2BFBA9D300F8166C /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 4B7FF7EC2BFBA9D300F8166C /* GoogleSignIn */; };
 		4B7FF7EF2BFBA9D300F8166C /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4B7FF7EE2BFBA9D300F8166C /* GoogleSignInSwift */; };
 		4B7FF7F22BFBAA6800F8166C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B7FF7F12BFBAA6800F8166C /* GoogleService-Info.plist */; };
@@ -45,7 +47,7 @@
 		4BD542D72C10DD6E008D3588 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD542D62C10DD6E008D3588 /* PlayerViewModel.swift */; };
 		4BD542DD2C10DF11008D3588 /* Sleep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD542DC2C10DF11008D3588 /* Sleep.swift */; };
 		4BD542E12C142E36008D3588 /* HealthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD542E02C142E36008D3588 /* HealthStore.swift */; };
-		4BD542E32C142FDB008D3588 /* StreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD542E22C142FDB008D3588 /* StreakView.swift */; };
+		4BD542E32C142FDB008D3588 /* StreakDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD542E22C142FDB008D3588 /* StreakDaysView.swift */; };
 		4BF2935A2C0A959F00836F97 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF293592C0A959F00836F97 /* Functions.swift */; };
 		4BFDC8162BFBEBB8001E6DED /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFDC8152BFBEBB8001E6DED /* SettingsViewModel.swift */; };
 		4BFDC81A2BFBEBFE001E6DED /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFDC8192BFBEBFE001E6DED /* AuthViewModel.swift */; };
@@ -90,6 +92,8 @@
 		4B7838002BE9382C0010B8D2 /* wedreamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = wedreamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B7838042BE9382C0010B8D2 /* wedreamUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wedreamUITests.swift; sourceTree = "<group>"; };
 		4B7838062BE9382C0010B8D2 /* wedreamUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wedreamUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4B7CDD0A2C264643001EE8ED /* StreakView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StreakView.swift; path = "/Users/supremegg/Desktop/PROGRAMMING/we-dream/wedream/Components/Views/../../../../../../Downloads/StreakView.swift"; sourceTree = "<absolute>"; };
+		4B7CDD0C2C2646DF001EE8ED /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateHelper.swift; path = ../../../../../Downloads/DateHelper.swift; sourceTree = "<group>"; };
 		4B7FF7F02BFBAA1A00F8166C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4B7FF7F12BFBAA6800F8166C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Services/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4B9264B72C0A8B7000577DAB /* ChallengesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengesManager.swift; sourceTree = "<group>"; };
@@ -105,7 +109,7 @@
 		4BD542DC2C10DF11008D3588 /* Sleep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sleep.swift; sourceTree = "<group>"; };
 		4BD542DE2C10E1FB008D3588 /* wedream.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wedream.entitlements; sourceTree = "<group>"; };
 		4BD542E02C142E36008D3588 /* HealthStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthStore.swift; sourceTree = "<group>"; };
-		4BD542E22C142FDB008D3588 /* StreakView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreakView.swift; sourceTree = "<group>"; };
+		4BD542E22C142FDB008D3588 /* StreakDaysView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreakDaysView.swift; sourceTree = "<group>"; };
 		4BDFD8BC2C17E34F00A1F133 /* package.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
 		4BDFD8BD2C17E34F00A1F133 /* package-lock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "package-lock.json"; sourceTree = "<group>"; };
 		4BDFD8BF2C17E35000A1F133 /* index.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
@@ -267,6 +271,7 @@
 		4BD542DF2C10E608008D3588 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				4B7CDD0C2C2646DF001EE8ED /* DateHelper.swift */,
 				4BD542E02C142E36008D3588 /* HealthStore.swift */,
 				4BBB3C872BFBB60200268DF9 /* SignInGoogleHelper.swift */,
 				4BD542DC2C10DF11008D3588 /* Sleep.swift */,
@@ -356,7 +361,8 @@
 			children = (
 				4B4126E02C0FD9CF00444721 /* InputView.swift */,
 				4B4C0A902C0E45BF0082A705 /* SliderView.swift */,
-				4BD542E22C142FDB008D3588 /* StreakView.swift */,
+				4B7CDD0A2C264643001EE8ED /* StreakView.swift */,
+				4BD542E22C142FDB008D3588 /* StreakDaysView.swift */,
 				4BA1149C2BEDA16200663C7F /* XPView.swift */,
 			);
 			path = Views;
@@ -549,6 +555,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B7CDD0B2C264643001EE8ED /* StreakView.swift in Sources */,
 				4BA114A52BEDB26400663C7F /* ChallengesView.swift in Sources */,
 				4BA1149D2BEDA16200663C7F /* XPView.swift in Sources */,
 				4BCF6D642C014EB60064D187 /* ProfileForm.swift in Sources */,
@@ -563,12 +570,13 @@
 				4B0EB54E2BF41F9F004B47A1 /* RootView.swift in Sources */,
 				4BBB3C882BFBB60200268DF9 /* SignInGoogleHelper.swift in Sources */,
 				4B0EB54C2BF3D9AB004B47A1 /* AuthManager.swift in Sources */,
+				4B7CDD0D2C2646DF001EE8ED /* DateHelper.swift in Sources */,
 				4BD542E12C142E36008D3588 /* HealthStore.swift in Sources */,
 				4BFDC81A2BFBEBFE001E6DED /* AuthViewModel.swift in Sources */,
 				4BF2935A2C0A959F00836F97 /* Functions.swift in Sources */,
 				4B4126E12C0FD9CF00444721 /* InputView.swift in Sources */,
 				4B0EB5482BF3D350004B47A1 /* AuthView.swift in Sources */,
-				4BD542E32C142FDB008D3588 /* StreakView.swift in Sources */,
+				4BD542E32C142FDB008D3588 /* StreakDaysView.swift in Sources */,
 				4B4126E52C10005200444721 /* SplashScreenView.swift in Sources */,
 				4BC330DE2C010E10005FC26C /* UserViewModel.swift in Sources */,
 				4B0EB54A2BF3D464004B47A1 /* LoginView.swift in Sources */,

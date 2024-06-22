@@ -9,7 +9,7 @@
 import SwiftUI
 import HealthKit
 
-struct StreakView: View {
+struct StreakDaysView: View {
     // @State private var healthStore = HealthStore()
     @State private var selectedDate = Date()
     @State private var sleepData: SleepData?
@@ -25,8 +25,6 @@ struct StreakView: View {
             Button("Fetch Sleep Data") {
                 Task {
                     self.sleepData = await HealthStore.shared.fetchSleepData(forDate: selectedDate)
-                    
-                    print("Streak View \(String(describing: sleepData))")
                     
                     /*
                     HealthStore.shared.fetchSleepData(forDate: selectedDate) { totalSleepDuration, todaySleepDuration, error in
@@ -105,7 +103,7 @@ struct StreakView: View {
 }
 
 #Preview {
-    StreakView()
+    StreakDaysView()
 }
 
 

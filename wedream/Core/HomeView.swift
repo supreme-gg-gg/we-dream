@@ -19,7 +19,7 @@ struct HomeView: View {
             // Top Navigation Bar
             HStack(alignment: .center, spacing: 50) {
                 Spacer()
-                NavBarItem(destination: AnyView(StreakView()), title: "Streak", image: "flame.fill")
+                NavBarItem(destination: AnyView(StreakView().environmentObject(userVM)), title: "Streak", image: "flame.fill")
                 NavBarItem(destination: AnyView(XPView()), title: "XP", image: "moonphase.waxing.crescent")
                 // NavBarItem(destination: AnyView(ProfileView(showSignInView: $showSignInView)), title: "Profile", image: "person.crop.circle.fill")
                 NavBarItem(destination: AnyView(SettingsView(showSignInView: $showSignInView)), title: "Settings", image: "gear")

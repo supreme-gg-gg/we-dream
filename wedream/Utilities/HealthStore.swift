@@ -227,8 +227,6 @@ class HealthStore {
 
         // Update and return the sleepData
         self.sleepData = SleepData(totalDuration: totalSleepDuration, todayDuration: todaySleepDuration)
-
-        print("After queries completion \(String(describing: self.sleepData))")
         
         return self.sleepData
         
