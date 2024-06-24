@@ -33,7 +33,7 @@ Due to privacy and financial complications as well as the recurring costs, the p
 
 ## Documentation
 As this project is part of our Grade 12 Computer Science Course, we have attached these documents for high school visitors to learn more about our project and potentially apply our experience to your ICS4U project in the future. Inside the first document, you will also be able to see photos that demonstrate certain features of the app.
-- [Software Development Document](#)
+- [Software Development Document](https://drive.google.com/file/d/1t98hih2oPN2OMlbaCXA8FJT0SDIl-aSB/view?usp=sharing)
 - [Project Brief](https://docs.google.com/presentation/d/1dN--nkRTe8h0pQwFc30J1iINycjwKJt6_zqvY2jmzoU/edit?usp=sharing)
 
 ## Feedback
