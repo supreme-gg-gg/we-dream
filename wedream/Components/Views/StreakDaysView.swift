@@ -15,14 +15,16 @@ struct StreakDaysView: View {
     @State private var sleepData: SleepData?
     @State private var todaySleep : TimeInterval?
     @State private var weekSleep : TimeInterval?
-
+// fetch data and select time
     var body: some View {
         VStack {
+            //select date to check
             DatePicker("Select Date", selection: $selectedDate, displayedComponents: .date)
                 .datePickerStyle(GraphicalDatePickerStyle())
                 .padding()
             
             Button("Fetch Sleep Data") {
+                //press the button to ask for data
                 Task {
                     self.sleepData = await HealthStore.shared.fetchSleepData(forDate: selectedDate)
                     
@@ -48,7 +50,7 @@ struct StreakDaysView: View {
             }
         }
         .padding()
-        
+        // if there's sleepdata available then show on the screen
         if let sleepData = sleepData {
             VStack {
                 Text("Date: \(selectedDate, formatter: dateFormatter)")
@@ -72,7 +74,7 @@ struct StreakDaysView: View {
             }
         } */
     }
-
+//date formatter is used to show date in the form of hour:minute
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -85,7 +87,7 @@ struct StreakDaysView: View {
         return String(format: "%02d:%02d", hours, minutes)
     }
     
-    private func getColor(for duration: TimeInterval) -> Color {
+    private func getColor(for duration: TimeInterval) -> Color {//different color according to the time of sleep
         
         let sleepHours = duration / 3600
         let threshold = 8.0 * 0.8
