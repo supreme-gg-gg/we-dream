@@ -1,17 +1,17 @@
 import SwiftUI
 
 struct SliderView: View {
-    // 状态变量用于跟踪起始和终止角度及其对应的进度
+    // State variables to track the start and end angles, and their corresponding progress.
     @State var startAngle: Double = 0
     @State var toAngle: Double = 180
     @State var startProgress: CGFloat = 0
     @State var toProgress: CGFloat = 0.5
     
-    @State private var lastAngle: Double? = nil  // 用于跟踪拖动过程中的上一次角度
+    @State private var lastAngle: Double? = nil  // Tracks the previous angle during dragging
     
     var body: some View {
         ZStack {
-            // 背景颜色设置
+            // Background color
             Color(cgColor: CGColor(red: 0, green: 0, blue: 0, alpha: 0.8))
             GeometryReader { proxy in
                 let width = proxy.size.width
@@ -19,7 +19,7 @@ struct SliderView: View {
                 let radius = (min(width, height)) / 2
                 ZStack {
                     
-                    // 构建表盘背景，每3度一个刻度，每5个刻度加粗
+                    // Creating the clock background with ticks every 3 degrees and bold ticks every 5 ticks
                     ForEach(1...120, id: \.self) { index in
                         Rectangle()
                             .fill(.gray)
@@ -27,7 +27,7 @@ struct SliderView: View {
                             .offset(y: (width - 60) / 2)
                             .rotationEffect(.init(degrees: Double(index) * 3))
                     }
-                    // 数字标记，每2小时一个标记
+                    // Number markers every 2 hours
                     ForEach(1...24, id: \.self) { index in
                         ZStack {
                             if index % 2 == 0 {
@@ -41,10 +41,10 @@ struct SliderView: View {
                         }
                         .rotationEffect(.init(degrees: -180))
                     }
-                    // 外圆环边框
+                    // Outer circle border
                     Circle()
                         .stroke(.black, lineWidth: 55)
-                    // 可动态调整的圆环部分
+                    // Adjustable part of the circle
                     let reverseRotation = (startProgress > toProgress) ? -Double((1 - startProgress) * 360) : 0
                     Circle()
                         .trim(from: startProgress > toProgress ? 0 : startProgress, to: toProgress + (-reverseRotation / 360))
@@ -59,6 +59,7 @@ struct SliderView: View {
                                     endDragProgress()
                                 })
                         )
+                    // Ticks for progress indicators
                     ForEach(0..<100, id: \.self) { index in
                         Rectangle()
                             .fill(Color.black.opacity(0.4))
@@ -69,7 +70,7 @@ struct SliderView: View {
                             .opacity(shouldShowLine(index: index) ? 1 : 0)
                     }
                     
-                    // 开始和结束拖动图标
+                    // Start and end drag icons
                     Image(systemName: "bed.double.fill")
                         .font(.callout)
                         .foregroundColor(.white)
@@ -105,7 +106,7 @@ struct SliderView: View {
             .padding(.top, 100)
             
             VStack {
-                // 显示睡眠和起床时间
+                // Display bedtime and wake-up time
                 HStack {
                     VStack {
                         HStack {
@@ -129,7 +130,7 @@ struct SliderView: View {
                             .font(.title2.bold())
                     }
                 }
-                // 显示时间差
+                // Display time difference
                 HStack {
                     Text("\(getTimeDifference().0) h" + "  \(getTimeDifference().1) min")
                         .font(.title2.bold())
@@ -147,17 +148,19 @@ struct SliderView: View {
         .ignoresSafeArea()
     }
     
+    // Determine whether a line should be displayed at a given index
     func shouldShowLine(index: Int) -> Bool {
-            let progress = CGFloat(index) / 100
-            if startProgress > toProgress {
-                // 跨越0点的情况
-                return progress >= startProgress || progress <= toProgress
-            } else {
-                // 正常情况
-                return progress >= startProgress && progress <= toProgress
-            }
+        let progress = CGFloat(index) / 100
+        if startProgress > toProgress {
+            // Case where the angle crosses the 0-degree point
+            return progress >= startProgress || progress <= toProgress
+        } else {
+            // Normal case
+            return progress >= startProgress && progress <= toProgress
         }
+    }
     
+    // Handle dragging events for angle and progress updates
     func onDrag(value: DragGesture.Value, fromSlider: Bool = false) {
         let vector = CGVector(dx: value.location.x, dy: value.location.y)
         let radians = atan2(vector.dy - 15, vector.dx - 15)
@@ -175,67 +178,69 @@ struct SliderView: View {
         }
     }
     
+    // Reset the lastAngle when drag ends
     func endDragProgress() {
         lastAngle = nil
     }
     
+    // Handle dragging progress updates
     func onDragProgress(value: DragGesture.Value) {
-        // 计算视图的中心点，这需要根据你的视图尺寸来调整
-        let width = UIScreen.main.bounds.width // 仅为示例，根据实际情况调整
+        // Calculate the center of the view, adjust according to your view size
+        let width = UIScreen.main.bounds.width // Just an example, adjust as needed
         let center = CGPoint(x: width / 2, y: width / 2)
         
-        // 计算当前触摸点相对于中心点的向量
+        // Calculate the vector from the center to the current touch point
         let currentVector = CGVector(dx: value.location.x - center.x, dy: value.location.y - center.y)
         
-        // 当前触摸点的角度
+        // Calculate the angle of the current touch point
         let currentAngle = atan2(currentVector.dy, currentVector.dx) * 180 / .pi
         
-        // 如果这是拖动的开始，初始化lastAngle
+        // Initialize lastAngle if this is the start of a drag
         if lastAngle == nil {
             lastAngle = currentAngle
         }
         
-        // 计算角度差
+        // Calculate the difference in angles
         let angleDifference = currentAngle - lastAngle!
         
-        // 应用角度差更新角度
+        // Apply the angle difference to update the angles
         startAngle = (startAngle + angleDifference).truncated(to: 360)
         toAngle = (toAngle + angleDifference).truncated(to: 360)
         
-        // 更新进度
+        // Update the progress
         startProgress = startAngle / 360
         toProgress = toAngle / 360
         
         lastAngle = currentAngle
     }
     
-    
+    // Convert an angle to a time
     func getTime(angle: Double) -> Date {
-        // 角度转换为24小时制小时数，每15度表示一个小时
+        // Convert angle to hour in a 24-hour format, every 15 degrees is an hour
         var hour = Int(angle / 15)
-        // 获取小时数后的剩余角度，并计算分钟数（每度对应4分钟）
+        // Get the remaining degrees after calculating hours, convert to minutes (4 minutes per degree)
         var minute = Int((angle.truncatingRemainder(dividingBy: 15)) * 4)
-        // 四舍五入到最近的5的倍数
-        minute = (minute + 2) / 5 * 5  // 添加2是为了确保正确四舍五入
+        // Round to the nearest multiple of 5
+        minute = (minute + 2) / 5 * 5  // Adding 2 ensures proper rounding
         
-        // 如果分钟数计算结果为60，将其调整为0，并且小时数加1（特别处理24点的情况）
+        // If minutes result in 60, adjust to 0 and add 1 to the hour (special case for 24:00)
         if minute == 60 {
             minute = 0
             hour = (hour + 1) % 24
         }
-        // DateFormatter设置为24小时制
+        // DateFormatter set to 24-hour format
         let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm:ss"  // 使用大写的"HH"来表示24小时制
+        formatter.dateFormat = "HH:mm:ss"  // Use uppercase "HH" for 24-hour format
         
-        // 根据计算出的小时和分钟构造时间字符串，并尝试转换为Date类型
+        // Create a time string from the calculated hour and minutes, try converting to Date type
         if let date = formatter.date(from: "\(hour):\(minute):00") {
             return date
         }
         
-        return formatter.date(from: "00:00:00") ?? .init()  // 如果转换失败，返回当前时间
+        return formatter.date(from: "00:00:00") ?? .init()  // Return current time if conversion fails
     }
     
-    
+    // Get the difference between start and end times
     func getTimeDifference() -> (Int, Int) {
         
         let calendar = Calendar.current
@@ -256,16 +261,16 @@ struct SliderView: View {
     }
 }
 
+// Extension to truncate angle values to a specified range
 extension Double {
-    /// 将角度值截断到指定的范围内。
-    /// - Parameter degrees: 指定的范围，通常是 360 度。
-    /// - Returns: 截断后的角度值，范围在 0 到指定的 degrees 之间。
+    /// Truncate an angle value to a specified range.
+    /// - Parameter degrees: The specified range, typically 360 degrees.
+    /// - Returns: The truncated angle value, within the range of 0 to the specified degrees.
     func truncated(to degrees: Double) -> Double {
-        // 将角度值取模，得到一个新的角度值 newAngle。
-        // 这个值在 -degrees 到 degrees 之间。
+        // Use modulus to get a new angle value within -degrees to degrees.
         let newAngle = self.truncatingRemainder(dividingBy: degrees)
-        // 如果 newAngle 小于 0，则加上 degrees，使其变为正值。
-        // 例如，如果 newAngle 是 -90，且 degrees 是 360，那么返回值将是 270。
+        // If the new angle is less than 0, add degrees to make it positive.
+        // For example, if newAngle is -90 and degrees is 360, the return value will be 270.
         return newAngle < 0 ? newAngle + degrees : newAngle
     }
 }
