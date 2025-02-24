@@ -1,6 +1,10 @@
 # WeDream
 
-Welcome to WeDream, an innovative solution designed to improve sleep for millions who struggle with rest and suffer its consequences.
+Welcome to WeDream, an innovative, modern solution inspired by Duolingo to help millions of people transform their sleep schedule and develop healthy routines.
+
+<img width="345" alt="Screenshot 2025-02-24 at 1 16 26 PM" src="https://github.com/user-attachments/assets/855f8a91-7183-4b21-8910-b238ed0f2f2f" />
+
+_In app footage_
 
 ## About WeDream
 
